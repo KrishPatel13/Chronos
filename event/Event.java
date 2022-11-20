@@ -33,17 +33,30 @@ public abstract class Event{
      */
     public abstract void performSetTime(TimeBehaviour t);
 
+    // REMINDER: Complete this once we have a working Calendar & view
     /**
      * Set this Event as "completed", and notify observers.
      */
-    public abstract void complete();
+    public void complete() {
+        for (EventObserver o : this.observerList) {
+            if (o.addPoints(this.pointValue)) {
+                // Tell the view to display a message!
+                // Add o to the calendar's list of completed goals!
+                this.observerList.remove(o);
+            }
+        }
+    }
 
     /**
      * Add a new goal associated with this Event to the observerList.
      *
      * @param o the observer to be added
      */
-    public abstract void addGoal(EventObserver o);
+    public void addGoal(EventObserver o) {
+        if (!this.observerList.contains(o)) {
+            this.observerList.add(o);
+        }
+    }
 
 
 }
