@@ -9,8 +9,17 @@ public abstract class Event{
     private String name; //Title that indicates what the event is. This shows on the calendar.
     private String description; //More detailed description of the event.
     private int pointValue; //How many points are awarded upon completion?
+
+    public TimeBehaviour getTimeBehaviour() {
+        return timeBehaviour;
+    }
+
+    public void setTimeBehaviour(TimeBehaviour timeBehaviour) {
+        this.timeBehaviour = timeBehaviour;
+    }
+
     private TimeBehaviour timeBehaviour;
-    private ArrayList<EventObserver> observerList;
+    private static ArrayList<EventObserver> observerList;
 
     /**
      * Constructor for a new Event. A new event requires a name and timeBehaviour, and other attributes can be set later.
@@ -18,10 +27,10 @@ public abstract class Event{
      * @param name the name of the new Event
      * @param timeBehaviour the Event's time behaviour. Contains the Event's time or start/end times
      */
-    public Event(String name, TimeBehaviour timeBehaviour) {
+    public Event(String name, String description, int points, TimeBehaviour timeBehaviour) {
         this.name = name;
-        this.description = "";
-        this.pointValue = 0;
+        this.description = description;
+        this.pointValue = points;
         this.timeBehaviour = timeBehaviour;
         this.observerList = new ArrayList<EventObserver>();
     }
