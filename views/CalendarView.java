@@ -62,26 +62,42 @@ public class CalendarView {
         Button makeEventButton = new Button("Make Event");
         makeEventButton.setLayoutX(200);
         makeEventButton.setLayoutY(600);
-        layout.getChildren().add(makeEventButton);
+
+        makeEventButton.setOnAction(e -> {
+
+        });
 
         //Create the button to make goals
         Button makeGoalButton = new Button("Make Goal");
         makeGoalButton.setLayoutX(500);
         makeGoalButton.setLayoutY(600);
-        layout.getChildren().add(makeGoalButton);
+
+        makeGoalButton.setOnAction(e -> {
+
+        });
 
         //Create the button to view
         Button viewGoalButton = new Button("View Goal");
         viewGoalButton.setLayoutX(825);
         viewGoalButton.setLayoutY(600);
-        layout.getChildren().add(viewGoalButton);
+
+        viewGoalButton.setOnAction(e -> {
+
+        });
 
         //Create the label to display the month and year
         //Date
         Label monthAndYear = new Label(LocalDate.now().toString());
         monthAndYear.setLayoutX(825);
         monthAndYear.setLayoutY(200);
+
+        //Add all components to the screen
+        layout.getChildren().add(makeEventButton);
+        layout.getChildren().add(makeGoalButton);
+        layout.getChildren().add(viewGoalButton);
         layout.getChildren().add(monthAndYear);
+
+
 
         //Finally, display everything
         Scene scene = new Scene(layout, 1100, 800);
