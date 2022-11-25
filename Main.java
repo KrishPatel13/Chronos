@@ -17,5 +17,5 @@ public class Main extends Application{
     public void start(Stage primaryStage) throws Exception {
         this.view = new CalendarView(new CalendarModel(),primaryStage);
     }
-
+    
 }
