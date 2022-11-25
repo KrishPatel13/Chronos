@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
+import model.CalendarModel;
 import views.CalendarView;
 
 public class Main extends Application{
@@ -14,7 +15,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        this.view = new CalendarView(primaryStage);
+        this.view = new CalendarView(new CalendarModel(),primaryStage);
     }
 
 }
