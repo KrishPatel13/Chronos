@@ -184,7 +184,12 @@ public class EventCreatorView {
 
                 // Finally, create a new Event with the new TimePoint deadline time of the event.
                 Event e = new Deadline(event_name, event_description, event_points, tp);
+
+
+                // Add the event to the events list of CalendarView.model.events
                 this.calendarView.model.addEvent(e);
+
+                //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
             }
             else
@@ -227,9 +232,14 @@ public class EventCreatorView {
                 // Create a TimeRange object.
                 TimeBehaviour tr = new TimeRange(start_time_block, end_time_block);
 
-                // Finally, create a new Event with the new TimePoint deadline time of the event.
+                // Finally, create a new Event with the new TimeRange start and end time of the event block.
                 Event e = new Block(event_name, event_description, event_points, tr);
+
+
+                // Add the event to the events list of CalendarView.model.events
                 this.calendarView.model.addEvent(e);
+
+                //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
             }
             else
