@@ -5,18 +5,21 @@ import observer.EventObserver;
 
 import java.util.ArrayList;
 
-public class CalendarModel {
-    Event[] events;
 
-    static ArrayList<EventObserver> completedGoals = new ArrayList<>();
+public class CalendarModel {
+    ArrayList<Event> events;
 
     public CalendarModel(){
-        this.events = new Event[]{};
+        this.events = new ArrayList<Event>();
 
     }
-    public CalendarModel(Event[] events){
+    public CalendarModel(ArrayList<Event> events){
         this.events = events;
     }
 
-    public static ArrayList<EventObserver> getCompletedGoals() {return completedGoals;}
+    public void addEvent(Event e)
+    {
+        this.events.add(e);
+    }
 }
+
