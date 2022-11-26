@@ -7,9 +7,7 @@ import java.time.LocalDateTime;
 
 public class Block extends Event{
 
-    private LocalDateTime startTime; // The Start time of the event.
-
-    private LocalDateTime endTime; // The End Time of the event.
+    private TimeBehaviour event_time;
 
 
     /**
@@ -22,8 +20,7 @@ public class Block extends Event{
      */
     public Block(String name, String description, int points, TimeBehaviour t) {
         super(name, description, points, t);
-        this.startTime = t.getStartTime();
-        this.endTime = t.getEndTime();
+        this.event_time = t;
     }
 
 
@@ -35,10 +32,6 @@ public class Block extends Event{
     @Override
     public void performSetTime(TimeBehaviour t)
     {
-        this.setTimeBehaviour(t);
-
-        this.startTime = t.getStartTime();
-
-        this.endTime = t.getEndTime();
+        this.event_time = t;
     }
 }

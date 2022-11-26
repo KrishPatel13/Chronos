@@ -8,26 +8,43 @@ public class TimeRange implements TimeBehaviour {
 
     private LocalDateTime endTime;
 
-    /**
-     * To set the time to a specific time range/point.
-     *
-     * @param t
-     */
-    @Override
-    public void setTime(LocalDateTime s, LocalDateTime e) {
-        this.startTime = s;
 
-        this.endTime = e;
-    }
-
-    /**
-     * @return
-     */
     public LocalDateTime getStartTime() {
         return this.startTime;
     }
 
     public LocalDateTime getEndTime() {
         return this.endTime;
+    }
+
+
+    /**
+     * To extend the end_time of the event.
+     *
+     * @param time
+     */
+    @Override
+    public void setTime(LocalDateTime time) {
+        this.endTime = time;
+    }
+
+
+
+    /**
+     * To set the time to a specific time range/point.
+     */
+    @Override
+    public void setTime(LocalDateTime time_start, LocalDateTime time_end) {
+        this.startTime = time_start;
+        this.endTime = time_end;
+    }
+
+
+    /**
+     * @return
+     */
+    @Override
+    public LocalDateTime getTime() {
+        return this.startTime;
     }
 }

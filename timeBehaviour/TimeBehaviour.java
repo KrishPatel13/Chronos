@@ -6,8 +6,10 @@ public interface TimeBehaviour {
     /**
      * To set the time to a specific time range/point.
      */
-    public void setTime(TimeBehaviour t);
+    public void setTime(LocalDateTime time);
 
-    public TimeBehaviour getTime();
+    public void setTime(LocalDateTime time1, LocalDateTime time2);
+
+    public LocalDateTime getTime();
 
 }

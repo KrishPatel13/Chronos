@@ -4,20 +4,11 @@ import timeBehaviour.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public abstract class Event{
+public class Event{
 
     private String name; //Title that indicates what the event is. This shows on the calendar.
     private String description; //More detailed description of the event.
     private int pointValue; //How many points are awarded upon completion?
-
-    public TimeBehaviour getTimeBehaviour() {
-        return timeBehaviour;
-    }
-
-    public void setTimeBehaviour(TimeBehaviour timeBehaviour) {
-        this.timeBehaviour = timeBehaviour;
-    }
-
     private TimeBehaviour timeBehaviour;
     private static ArrayList<EventObserver> observerList;
 
@@ -40,7 +31,10 @@ public abstract class Event{
      *
      * @param t the new timeBehaviour
      */
-    public abstract void performSetTime(TimeBehaviour t);
+    public  void performSetTime(TimeBehaviour t)
+    {
+        this.timeBehaviour = t;
+    }
 
     // REMINDER: Complete this once we have a working Calendar & view
     /**
