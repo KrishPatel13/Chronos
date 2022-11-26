@@ -2,6 +2,7 @@ package event;
 import model.CalendarModel;
 import observer.*;
 import timeBehaviour.*;
+import views.GoalCompleteView;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,7 @@ public abstract class Event{
     public void complete() {
         for (EventObserver o : observerList) {
             if (o.addPoints(this.pointValue)) {
-                // Tell the view to display a message!
+                GoalCompleteView gcv = new GoalCompleteView((Goal) o);
                 CalendarModel.getCompletedGoals().add(o);
                 observerList.remove(o);
             }

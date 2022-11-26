@@ -65,7 +65,7 @@ public class CalendarView {
         makeEventButton.setScaleX(1.15);
         makeEventButton.setScaleY(1.15);
         makeEventButton.setOnAction(e -> {
-
+            EventCreatorView ecv = new EventCreatorView(this);
         });
 
         //Create the button to make goals
