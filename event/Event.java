@@ -1,7 +1,9 @@
 package event;
+import model.CalendarModel;
 import observer.*;
 import timeBehaviour.*;
-import java.time.LocalDateTime;
+import views.GoalCompleteView;
+
 import java.util.ArrayList;
 
 public class Event{
@@ -10,7 +12,8 @@ public class Event{
     private String description; //More detailed description of the event.
     private int pointValue; //How many points are awarded upon completion?
     private TimeBehaviour timeBehaviour;
-    private static ArrayList<EventObserver> observerList;
+    
+    private static ArrayList<EventObserver> observerList = new ArrayList<>();
 
     /**
      * Constructor for a new Event. A new event requires a name and timeBehaviour, and other attributes can be set later.
@@ -23,7 +26,6 @@ public class Event{
         this.description = description;
         this.pointValue = points;
         this.timeBehaviour = timeBehaviour;
-        this.observerList = new ArrayList<EventObserver>();
     }
 
     /**
@@ -41,11 +43,11 @@ public class Event{
      * Set this Event as "completed", and notify observers.
      */
     public void complete() {
-        for (EventObserver o : this.observerList) {
+        for (EventObserver o : observerList) {
             if (o.addPoints(this.pointValue)) {
-                // Tell the view to display a message!
-                // Add o to the calendar's list of completed goals!
-                this.observerList.remove(o);
+                GoalCompleteView gcv = new GoalCompleteView((Goal) o);
+                CalendarModel.getCompletedGoals().add(o);
+                observerList.remove(o);
             }
         }
     }
@@ -56,9 +58,18 @@ public class Event{
      * @param o the observer to be added
      */
     public void addGoal(EventObserver o) {
-        if (!this.observerList.contains(o)) {
-            this.observerList.add(o);
+        if (!observerList.contains(o)) {
+            observerList.add(o);
         }
+    }
+
+    /**
+     * Get the list of observers for events.
+     *
+     * @return observerList
+     */
+    public static ArrayList<EventObserver> getObserverList() {
+        return observerList;
     }
 
 

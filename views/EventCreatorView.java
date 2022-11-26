@@ -1,8 +1,11 @@
 package views;
 
+
 import event.Block;
 import event.Deadline;
 import event.Event;
+
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import timeBehaviour.TimeBehaviour;
 import timeBehaviour.TimePoint;
 import timeBehaviour.TimeRange;
@@ -20,11 +24,10 @@ import timeBehaviour.TimeRange;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+import java.time.LocalDate;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 
 public class EventCreatorView {
@@ -121,6 +124,7 @@ public class EventCreatorView {
      * Create a new Event using the parameters given in the text fields and date pickers.
      * Store this new Event in the CalendarModel's list of Events.
      */
+
     private void createEvent() throws NumberFormatException{
 
         // Check if the Event's Name is not empty.
@@ -250,6 +254,4 @@ public class EventCreatorView {
             }
 
         }
-
-    }
 }

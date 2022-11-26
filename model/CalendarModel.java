@@ -1,8 +1,10 @@
 package model;
 
 import event.Event;
+import observer.EventObserver;
 
 import java.util.ArrayList;
+
 
 public class CalendarModel {
     ArrayList<Event> events;
@@ -20,3 +22,4 @@ public class CalendarModel {
         this.events.add(e);
     }
 }
+

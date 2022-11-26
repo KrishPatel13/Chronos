@@ -44,4 +44,13 @@ public class Goal implements EventObserver {
      */
     public void setName(String n) { this.name = n;}
 
+    @Override
+    public String toString() {
+        if (this.currentPoints >= this.pointsToBadge) {
+            return this.name;
+        }
+        else {
+            return this.name + ": " + this.currentPoints + "/" + this.pointsToBadge;
+        }
+    }
 }
