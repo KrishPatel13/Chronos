@@ -140,7 +140,7 @@ public class EventCreatorView {
 
 
 
-        String points = String.valueOf(this.pointsTextField).trim();
+        String points = String.valueOf(this.pointsTextField.getText()).trim();
         int event_points = 0;
         // Check if the Event's associated Points are of integer type.
         try
@@ -184,6 +184,7 @@ public class EventCreatorView {
                 // Finally, create a new Event with the new TimePoint deadline time of the event.
                 Event e = new Deadline(event_name, event_description, event_points, tp);
                 this.calendarView.model.addEvent(e);
+                this.errorLabel.setText("Event Added to the Calendar!");
             }
             else
             {
