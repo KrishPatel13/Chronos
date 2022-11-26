@@ -1,3 +1,5 @@
+package views;
+
 import event.Event;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -29,7 +31,7 @@ public class NewGoalView {
 
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
-        // dialog.initOwner(calendarView.stage);
+        dialog.initOwner(calendarView.stage);
         VBox dialogVbox = new VBox(20);
         dialogVbox.setPadding(new Insets(20, 20, 20, 20));
 

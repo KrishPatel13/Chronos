@@ -1,5 +1,5 @@
 package event;
-import Model.CalendarModel;
+import model.CalendarModel;
 import observer.*;
 import timeBehaviour.*;
 

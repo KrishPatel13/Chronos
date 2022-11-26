@@ -1,4 +1,6 @@
-import Model.CalendarModel;
+package views;
+
+import model.CalendarModel;
 import event.Event;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +13,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import observer.EventObserver;
-import observer.Goal;
 
 import java.util.ArrayList;
 

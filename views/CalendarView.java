@@ -73,7 +73,7 @@ public class CalendarView {
         makeGoalButton.setScaleX(1.15);
         makeGoalButton.setScaleY(1.15);
         makeGoalButton.setOnAction(e -> {
-
+            NewGoalView ngv = new NewGoalView(this);
         });
 
         //Create the button to view
@@ -81,7 +81,7 @@ public class CalendarView {
         viewGoalButton.setScaleX(1.15);
         viewGoalButton.setScaleY(1.15);
         viewGoalButton.setOnAction(e -> {
-
+            GoalListView glv = new GoalListView(this);
         });
 
         //Create Button for changing the theme
