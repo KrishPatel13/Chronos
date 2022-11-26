@@ -8,6 +8,11 @@ public class TimeRange implements TimeBehaviour {
 
     private LocalDateTime endTime;
 
+    public TimeRange(LocalDateTime start_time_block, LocalDateTime end_time_block) {
+        this.startTime = start_time_block;
+        this.endTime = end_time_block;
+    }
+
 
     public LocalDateTime getStartTime() {
         return this.startTime;

@@ -1,5 +1,6 @@
 package views;
 
+import event.Block;
 import event.Deadline;
 import event.Event;
 import javafx.geometry.Insets;
@@ -14,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import timeBehaviour.TimeBehaviour;
 import timeBehaviour.TimePoint;
+import timeBehaviour.TimeRange;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -157,7 +159,7 @@ public class EventCreatorView {
 
 
         //Check the type of the time and create time range or time point based on that.
-        if(this.endTimePicker.getText().trim().isBlank() || this.endTimePicker.getText().trim().isEmpty())
+        if(this.endTimePicker.getText().trim().isBlank() || this.endTimePicker.getText().trim().isEmpty() || this.startTimePicker.getText().trim().equals("Start time (hh:mm)") || this.endTimePicker.getText().trim().equals("End time (hh:mm)"))
         {
             // Create a new Time Point object based on the deadline of the user.
 
@@ -168,12 +170,11 @@ public class EventCreatorView {
             if(matcher.find())
             {
                 // match found, valid deadline HH:mm.
-                String yyyy_mm_dd = this.pointDatePicker.toString();
+                String yyyy_mm_dd = this.pointDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
                 // TODO: Consider the case of  the where the deadline is a past date.
 
-
-                String yyyy_mm_dd_HH_mm = yyyy_mm_dd+deadline_hours;
+                String yyyy_mm_dd_HH_mm = yyyy_mm_dd+" "+deadline_hours;
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 LocalDateTime pointTime = LocalDateTime.parse(yyyy_mm_dd_HH_mm, formatter);
 
@@ -190,8 +191,8 @@ public class EventCreatorView {
             {
                 // Invalid Format of HH:mm
                 this.errorLabel.setText("Please Re-enter the time of the event. Enter in HH:mm format.");
+                return;
             }
-            return;
         }
         else
         {
@@ -202,6 +203,41 @@ public class EventCreatorView {
             String end_time = this.endTimePicker.getText().trim();
 
 
+            Pattern pattern = Pattern.compile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+
+            Matcher matcher = pattern.matcher(start_time);
+            Matcher matcher1 = pattern.matcher(end_time);
+
+            if(matcher1.find() && matcher.find())
+            {
+                // match found, valid deadline HH:mm.
+                String yyyy_mm_dd = this.pointDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                // TODO: Consider the case of  the where the deadline is a past date.
+
+                String yyyy_mm_dd_HH_mm = yyyy_mm_dd+" "+start_time;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime start_time_block = LocalDateTime.parse(yyyy_mm_dd_HH_mm, formatter);
+
+                String yyyy_mm_dd_HH_mm2 = yyyy_mm_dd+" "+end_time;
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime end_time_block = LocalDateTime.parse(yyyy_mm_dd_HH_mm2, formatter2);
+
+
+                // Create a TimeRange object.
+                TimeBehaviour tr = new TimeRange(start_time_block, end_time_block);
+
+                // Finally, create a new Event with the new TimePoint deadline time of the event.
+                Event e = new Block(event_name, event_description, event_points, tr);
+                this.calendarView.model.addEvent(e);
+                this.errorLabel.setText("Event Added to the Calendar!");
+            }
+            else
+            {
+                // Invalid Format of HH:mm
+                this.errorLabel.setText("Invalid Start/End time of the event. Enter in HH:mm format.");
+                return;
+            }
 
         }
 
