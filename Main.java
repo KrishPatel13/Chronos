@@ -1,21 +1,28 @@
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.Scene;
+import model.CalendarModel;
+import views.CalendarView;
 
-import java.io.IOException;
 
-public class Main extends Application {
+public class Main extends Application
+{
+
+    CalendarView view;
+
+
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+    
+    
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("CalendarView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Chronos");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage primaryStage) throws Exception 
+    {
+        this.view = new CalendarView(new CalendarModel(),primaryStage);
     }
-
-    public static void main(String[] args) {
-        launch();
-    }
+    
 }
+
