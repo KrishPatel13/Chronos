@@ -1,6 +1,8 @@
 package views;
 
+
 import event.Event;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -12,8 +14,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+//import Main;
 import model.CalendarModel;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 
@@ -91,7 +95,16 @@ public class CalendarView {
         changeThemeButton.setScaleX(1.15);
         changeThemeButton.setScaleY(1.15);
         changeThemeButton.setOnAction(e -> {
-
+            FXMLLoader fxmlLoader = new FXMLLoader(CalendarView.class.getResource("ColorPick.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            stage.setTitle("Chronos");
+            stage.setScene(scene);
+            stage.show();
         });
 
         //Create button bar
