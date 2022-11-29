@@ -1,8 +1,6 @@
 package views;
 
 
-import event.Block;
-import event.Deadline;
 import event.Event;
 
 
@@ -176,7 +174,7 @@ public class EventCreatorView {
                 TimeBehaviour tp = new TimePoint(pointTime);
 
                 // Finally, create a new Event with the new TimePoint deadline time of the event.
-                Event e = new Deadline(event_name, event_description, event_points, tp);
+                Event e = new Event(event_name, event_description, event_points, tp);
 
 
                 // Add the event to the events list of CalendarView.model.events
@@ -221,7 +219,7 @@ public class EventCreatorView {
                 TimeBehaviour tr = new TimeRange(start_time_block, end_time_block);
 
                 // Finally, create a new Event with the new TimeRange start and end time of the event block.
-                Event e = new Block(event_name, event_description, event_points, tr);
+                Event e = new Event(event_name, event_description, event_points, tr);
 
 
                 // Add the event to the events list of CalendarView.model.events
