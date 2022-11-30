@@ -13,8 +13,11 @@ import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.CalendarModel;
+import observer.EventObserver;
 
+import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 public class CalendarView {
@@ -28,8 +31,59 @@ public class CalendarView {
 
     public CalendarView(CalendarModel model, Stage stage){
         this.model = model;
+        loadModel();
         this.stage = stage;
         initUI();
+    }
+
+    public void loadModel() {
+        File folder = new File("save/");
+        if (!folder.exists()) {
+            return;
+        }
+        File[] fileList = folder.listFiles();
+        assert fileList != null;
+        for (File f : fileList) {
+            if (f.isFile() && f.getName().equals("model.ser")) {
+                try {
+                    FileInputStream file = new FileInputStream("save/model.ser");
+                    ObjectInputStream in = new ObjectInputStream(file);
+                    ArrayList<Object> loadList = (ArrayList<Object>) in.readObject();
+                    this.model = (CalendarModel) loadList.get(0);
+                    Event.setObserverList((ArrayList<EventObserver>) loadList.get(1));
+                    CalendarModel.setCompletedGoals((ArrayList<EventObserver>) loadList.get(2));
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }
+    }
+
+    public void saveModel() {
+        File folder = new File("save/");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+        File fModel = new File("save/model.ser");
+        ArrayList<Object> saveList = new ArrayList<>();
+        try {
+            saveList.add(this.model);
+            saveList.add(Event.getObserverList());
+            saveList.add(CalendarModel.getCompletedGoals());
+            FileOutputStream fout = new FileOutputStream(fModel);
+            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            oos.writeObject(saveList);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void initUI(){
