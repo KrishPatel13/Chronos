@@ -72,5 +72,9 @@ public class Event{
         return observerList;
     }
 
+    public TimeBehaviour getTime(){return this.timeBehaviour;}
 
+    public String getName(){
+        return this.name;
+    }
 }

@@ -39,4 +39,12 @@ public class TimePoint implements TimeBehaviour{
     public LocalDateTime getTime() {
         return this.deadlineTime;
     }
+
+    @Override
+    public boolean inTime(LocalDateTime time) {
+        if (this.deadlineTime.toLocalDate().equals(time.toLocalDate())){
+            return true;
+        }
+        return false;
+    }
 }

@@ -1,6 +1,8 @@
 package views;
 
 import event.Event;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -15,6 +17,8 @@ import javafx.stage.Stage;
 import model.CalendarModel;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 public class CalendarView {
@@ -25,6 +29,9 @@ public class CalendarView {
     String[] months = {"January", "February", "March", "April",
             "May", "June", "July", "August",
             "September", "October", "November", "December"};
+
+    ListView<String> eventsView = new ListView<>();
+    ArrayList<Event> events = new ArrayList<>();
 
     public CalendarView(CalendarModel model, Stage stage){
         this.model = model;
@@ -59,6 +66,7 @@ public class CalendarView {
         //When a date is selected, update our list of events in the below
         calendar.setOnAction(e ->{
             dateDisplay.setText(calendar.getValue().toString());
+            this.displayEvents(calendar.getValue().atStartOfDay());
         });
 
 
@@ -100,16 +108,16 @@ public class CalendarView {
         buttons.getChildren().addAll(makeEventButton, makeGoalButton, viewGoalButton, changeThemeButton);
         buttons.setPadding(new Insets(20));
 
-        //Create view for goals
-        VBox goalDisplay = new VBox();
-        goalDisplay.setPadding(new Insets(20));
-        ListView<String> goals = new ListView<>();
-        goalDisplay.getChildren().addAll(dateDisplay, goals);
+        //Create view for events
+        VBox eventDisplay = new VBox();
+        eventDisplay.setPadding(new Insets(20));
+        this.displayEvents(LocalDateTime.now());
+        eventDisplay.getChildren().addAll(dateDisplay, eventsView);
 
         //put everything together
         realLayout.setCenter(calendarLayout);
         realLayout.setBottom(buttons);
-        realLayout.setRight(goalDisplay);
+        realLayout.setRight(eventDisplay);
 
 
         //Finally, display everything
@@ -118,6 +126,17 @@ public class CalendarView {
         this.stage.setScene(scene);
         this.stage.show();
 
+    }
+
+    private void displayEvents(LocalDateTime time)
+    {
+        ArrayList<Event> filteredEvents = this.model.getEventsInTime(time);
+        ArrayList<String> eventNames = new ArrayList<>();
+        for (Event e: filteredEvents){
+            eventNames.add(e.getName());
+        }
+        ObservableList<String> namesToDisplay = FXCollections.observableArrayList(eventNames);
+        this.eventsView.setItems(namesToDisplay);
     }
 
 }
