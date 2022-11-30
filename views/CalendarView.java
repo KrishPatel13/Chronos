@@ -145,6 +145,7 @@ public class CalendarView {
         changeThemeButton.setScaleX(1.15);
         changeThemeButton.setScaleY(1.15);
         changeThemeButton.setOnAction(e -> {
+            // Configure the Color
 
         });
 
