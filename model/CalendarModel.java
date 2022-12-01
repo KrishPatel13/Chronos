@@ -3,6 +3,8 @@ package model;
 import event.Event;
 import observer.EventObserver;
 
+
+import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,6 +31,20 @@ public class CalendarModel implements Serializable {
     public void addEvent(Event e)
     {
         this.events.add(e);
+    }
+
+    public ArrayList<Event> getAllEvents(){
+        return this.events;
+    }
+
+    public ArrayList<Event> getEventsInTime(LocalDateTime time) {
+        ArrayList<Event> filteredEvents = new ArrayList<>();
+        for (Event e: this.events){
+            if (e.getTime().inTime(time)){
+                filteredEvents.add(e);
+            }
+        }
+        return filteredEvents;
     }
 }
 

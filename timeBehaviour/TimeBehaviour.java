@@ -12,4 +12,6 @@ public interface TimeBehaviour {
 
     public LocalDateTime getTime();
 
+    public boolean inTime(LocalDateTime time);
+
 }
