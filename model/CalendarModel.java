@@ -3,12 +3,14 @@ package model;
 import event.Event;
 import observer.EventObserver;
 
+
 import java.time.LocalDateTime;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class CalendarModel {
+public class CalendarModel implements Serializable {
     ArrayList<Event> events;
     private static ArrayList<EventObserver> completedGoals = new ArrayList<>();
 
@@ -23,6 +25,8 @@ public class CalendarModel {
     public static ArrayList<EventObserver> getCompletedGoals() {
         return completedGoals;
     }
+
+    public static void setCompletedGoals(ArrayList<EventObserver> oList) {completedGoals = oList;}
 
     public void addEvent(Event e)
     {
