@@ -70,7 +70,7 @@ public class EventEditorView {
         dialog.show();
         dialog.setAlwaysOnTop(true);
 
-        saveButton.setOnAction(e -> editEvent());
+//        saveButton.setOnAction(e -> editEvent());
 
 //        completeButton.setOnAction(e -> completeEvent());
 
@@ -108,13 +108,6 @@ public class EventEditorView {
             this.startTimePicker.setText(tr.getStartTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).substring(11,16));
             this.endTimePicker.setText(tr.getEndTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).substring(11,16));
         }
-    }
-
-
-    //TODO: Implement editEvent()
-    private void editEvent() {
-
-
     }
 
     /**

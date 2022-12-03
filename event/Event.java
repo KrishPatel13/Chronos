@@ -101,9 +101,4 @@ public class Event implements Serializable {
      */
     public static void setObserverList(ArrayList<EventObserver> oList) { observerList = oList; }
 
-
-
-    public String getName(){
-        return this.name;
-    }
 }
