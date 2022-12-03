@@ -1,8 +1,9 @@
 package timeBehaviour;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public interface TimeBehaviour {
+public interface TimeBehaviour extends Serializable {
     /**
      * To set the time to a specific time range/point.
      */
@@ -13,5 +14,4 @@ public interface TimeBehaviour {
     public LocalDateTime getTime();
 
     public boolean inTime(LocalDateTime time);
-
 }
