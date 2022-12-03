@@ -48,12 +48,16 @@ public class Event implements Serializable {
      * Set this Event as "completed", and notify observers.
      */
     public void complete() {
+        ArrayList<EventObserver> completed = new ArrayList<>();
         for (EventObserver o : observerList) {
             if (o.addPoints(this.pointValue)) {
                 GoalCompleteView gcv = new GoalCompleteView((Goal) o);
                 CalendarModel.getCompletedGoals().add(o);
-                observerList.remove(o);
+                completed.add(o);
             }
+        }
+        for (EventObserver o : completed) {
+            observerList.remove(o);
         }
     }
 
