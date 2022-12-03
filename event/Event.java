@@ -90,6 +90,10 @@ public class Event implements Serializable {
         return observerList;
     }
 
+
+    public TimeBehaviour getTime(){return this.timeBehaviour;}
+
+
     /**
      * Set the list of observers for events. Useful for loading files.
      *
@@ -98,4 +102,8 @@ public class Event implements Serializable {
     public static void setObserverList(ArrayList<EventObserver> oList) { observerList = oList; }
 
 
+
+    public String getName(){
+        return this.name;
+    }
 }
