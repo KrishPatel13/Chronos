@@ -121,7 +121,7 @@ public class EventCreatorView {
      * Create a new Event using the parameters given in the text fields and date pickers.
      * Store this new Event in the CalendarModel's list of Events.
      */
-
+    //TODO: Make sure events don't share the same name
     private void createEvent() throws NumberFormatException {
 
         // Check if the Event's Name is not empty.

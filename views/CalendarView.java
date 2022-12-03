@@ -179,7 +179,17 @@ public class CalendarView {
         //completeEventButton.setScaleX(1.15);
         //completeEventButton.setScaleY(1.15);
         completeEventButton.setOnAction(e -> {
-
+            String eventName = this.eventsView.getSelectionModel().getSelectedItem();
+            if (eventName == null){
+                return;
+            }
+            //int index = 0;
+            for (Event event: this.events){
+                if (event.getName() == eventName){
+                    event.complete();
+                    //this.events.remove(event);
+                }
+            }
         });
 
         //Create bar for editing and completing events
