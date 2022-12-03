@@ -8,9 +8,26 @@ import java.util.ArrayList;
 
 public class Event{
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getPointValue() {
+        return pointValue;
+    }
+
     private String name; //Title that indicates what the event is. This shows on the calendar.
     private String description; //More detailed description of the event.
     private int pointValue; //How many points are awarded upon completion?
+
+    public TimeBehaviour getTimeBehaviour() {
+        return timeBehaviour;
+    }
+
     private TimeBehaviour timeBehaviour;
     
     private static ArrayList<EventObserver> observerList = new ArrayList<>();
