@@ -162,11 +162,31 @@ public class CalendarView {
         buttons.getChildren().addAll(makeEventButton, makeGoalButton, viewGoalButton, changeThemeButton);
         buttons.setPadding(new Insets(20));
 
+        //Create buttons for editing and completing events
+        Button editButton = new Button("Edit Event");
+        //editButton.setScaleY(1.15);
+        //editButton.setScaleX(1.15);
+        editButton.setOnAction(e -> {
+
+        });
+
+        Button completeEventButton = new Button("Complete Event");
+        //completeEventButton.setScaleX(1.15);
+        //completeEventButton.setScaleY(1.15);
+        completeEventButton.setOnAction(e -> {
+
+        });
+
+        //Create bar for editing and completing events
+        HBox eventsManaging = new HBox();
+        eventsManaging.getChildren().addAll(editButton, completeEventButton);
+        eventsManaging.setPadding(new Insets(20));
+
         //Create view for events
         VBox eventDisplay = new VBox();
         eventDisplay.setPadding(new Insets(20));
         this.displayEvents(LocalDateTime.now());
-        eventDisplay.getChildren().addAll(dateDisplay, eventsView);
+        eventDisplay.getChildren().addAll(dateDisplay, eventsView, eventsManaging);
 
         //put everything together
         realLayout.setCenter(calendarLayout);
