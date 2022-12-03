@@ -169,6 +169,14 @@ public class CalendarView {
         editButton.setOnAction(e -> {
             if (this.eventsView.getSelectionModel().getSelectedItem() != null){
 
+                for(Event i: this.events)
+                {
+                    if(i.getName().equals(this.eventsView.getSelectionModel().getSelectedItem()))
+                    {
+                        EventEditorView editorView = new EventEditorView(this, i);
+                        break;
+                    }
+                }
             }
             else{
                 System.out.println("Need to select an item");
