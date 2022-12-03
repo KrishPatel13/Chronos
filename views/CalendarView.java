@@ -167,7 +167,12 @@ public class CalendarView {
         //editButton.setScaleY(1.15);
         //editButton.setScaleX(1.15);
         editButton.setOnAction(e -> {
+            if (this.eventsView.getSelectionModel().getSelectedItem() != null){
 
+            }
+            else{
+                System.out.println("Need to select an item");
+            }
         });
 
         Button completeEventButton = new Button("Complete Event");
