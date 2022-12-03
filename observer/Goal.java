@@ -1,6 +1,8 @@
 package observer;
 
-public class Goal implements EventObserver {
+import java.io.Serializable;
+
+public class Goal implements EventObserver, Serializable {
 
     private String name;
     private int currentPoints;

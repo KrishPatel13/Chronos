@@ -4,9 +4,10 @@ import observer.*;
 import timeBehaviour.*;
 import views.GoalCompleteView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Event{
+public class Event implements Serializable {
 
     public String getName() {
         return name;
@@ -88,6 +89,13 @@ public class Event{
     public static ArrayList<EventObserver> getObserverList() {
         return observerList;
     }
+
+    /**
+     * Set the list of observers for events. Useful for loading files.
+     *
+     * @param oList the list of observers.
+     */
+    public static void setObserverList(ArrayList<EventObserver> oList) { observerList = oList; }
 
 
 }
