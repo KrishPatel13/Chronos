@@ -72,49 +72,55 @@ public class EventEditorView {
 
         saveButton.setOnAction(e -> editEvent());
 
-        completeButton.setOnAction(e -> completeEvent());
+//        completeButton.setOnAction(e -> completeEvent());
 
 
         changeTimeButton.setOnAction(e -> changeTime(vbox));
 
-        //TODO: Add getter methods to Event so its details can be displayed in this view
         editEventLabel.setText("Edit/Complete Event: " + event.getName());
         nameTextField.setText(event.getName());
         pointsTextField.setText(String.valueOf(event.getPointValue()));
         descTextField.setText(event.getDescription());
-        //If event has a time point:
 
+
+        //If event has a time point:
         if(event.getTimeBehaviour() instanceof TimePoint)
         {
+            TimePoint tp = (TimePoint) event.getTimeBehaviour();
+
             //set values of pointDatePicker and pointTimePicker to event's time
-            this.pointDatePicker.setValue(event.getTimeBehaviour().getTime().toLocalDate());
-            this.pointTimePicker.setText(event.getTimeBehaviour().getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).substring(11,  16));
+            this.pointDatePicker.setValue(tp.getTime().toLocalDate());
+            this.pointTimePicker.setText(tp.getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).substring(11,16));
         }
 
 
 
         //If event has a time range:
         else {
-            //changeTime(vbox);
+            changeTime(vbox);
 
             //set values of startDatePicker, startTimePicker, endDatePicker and endTimePicker
-
             TimeRange tr = (TimeRange) event.getTimeBehaviour();
 
-            this.startDatePicker.setValue((TimeRange)(event.getTimeBehaviour()).getStartTime().toLocalDate());
-            this.endDatePicker.setValue(event.getTimeBehaviour().getEndTime().toLocalDate());
+            this.startDatePicker.setValue(tr.getStartTime().toLocalDate());
+            this.endDatePicker.setValue(tr.getEndTime().toLocalDate());
+
+            this.startTimePicker.setText(tr.getStartTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).substring(11,16));
+            this.endTimePicker.setText(tr.getEndTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).substring(11,16));
         }
     }
 
 
 
-    //TODO: Implement completeEvent()
-    private void completeEvent() {
-    }
+//    //TODO: Implement completeEvent()
+//    private void completeEvent() {
+//    }
 
 
     //TODO: Implement editEvent()
     private void editEvent() {
+
+
     }
 
     /**
