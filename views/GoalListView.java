@@ -2,6 +2,7 @@ package views;
 
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Paint;
 import model.CalendarModel;
 import event.Event;
 import javafx.collections.FXCollections;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class GoalListView {
 
     CalendarView calendarView;
+    private Paint colour;
 
     /**
      * Constructor
@@ -29,12 +31,15 @@ public class GoalListView {
      */
     public GoalListView(CalendarView calendarView) {
         this.calendarView = calendarView;
+        this.colour = CalendarView.colour;
 
         final Stage dialog = new Stage();
         Label labelOngoing = new Label("Ongoing goals:");
         labelOngoing.setFont(new Font(16));
+        labelOngoing.setTextFill(CalendarView.colour_font);
         Label labelComplete = new Label("Completed goals:");
         labelComplete.setFont(new Font(16));
+        labelComplete.setTextFill(CalendarView.colour_font);
 
         ArrayList<String> goalsOngoingList = new ArrayList<>();
         for (EventObserver o : Event.getObserverList()) {

@@ -35,6 +35,10 @@ public class CalendarView {
     String[] months = {"January", "February", "March", "April",
             "May", "June", "July", "August",
             "September", "October", "November", "December"};
+    Button makeEventButton;
+    Button makeGoalButton;
+    Button changeThemeButton;
+    Button viewGoalButton;
     static Paint colour;
     static Paint colour_font = javafx.scene.paint.Color.valueOf("#000000") ;
 
@@ -79,7 +83,7 @@ public class CalendarView {
 
 
         //Create the button to make events
-        Button makeEventButton = new Button("Make Event");
+        this.makeEventButton = new Button("Make Event");
         makeEventButton.setTextFill(colour_font);
         makeEventButton.setScaleX(1.15);
         makeEventButton.setScaleY(1.15);
@@ -88,7 +92,7 @@ public class CalendarView {
         });
 
         //Create the button to make goals
-        Button makeGoalButton = new Button("Make Goal");
+        this.makeGoalButton = new Button("Make Goal");
         makeGoalButton.setTextFill(colour_font);
         makeGoalButton.setScaleX(1.15);
         makeGoalButton.setScaleY(1.15);
@@ -97,7 +101,7 @@ public class CalendarView {
         });
 
         //Create the button to view
-        Button viewGoalButton = new Button("View Goal");
+        this.viewGoalButton = new Button("View Goal");
         viewGoalButton.setTextFill(colour_font);
         viewGoalButton.setScaleX(1.15);
         viewGoalButton.setScaleY(1.15);
@@ -106,7 +110,7 @@ public class CalendarView {
         });
 
         //Create Button for changing the theme
-        Button changeThemeButton = new Button("Change Theme");
+        this.changeThemeButton = new Button("Change Theme");
         changeThemeButton.setTextFill(colour_font);
         changeThemeButton.setScaleX(1.15);
         changeThemeButton.setScaleY(1.15);
@@ -152,7 +156,6 @@ public class CalendarView {
         this.stage.setScene(scene);
         this.stage.show();
     }
-
   
 
 }

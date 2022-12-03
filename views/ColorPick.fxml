@@ -13,10 +13,10 @@
          <children>
             <ColorPicker fx:id="cp2" layoutX="-9.0" layoutY="26.0" onAction="#handleFontColor" />
             <Circle fx:id="circle2" fill="DODGERBLUE" layoutX="53.0" layoutY="154.0" radius="53.0" stroke="BLACK" strokeType="INSIDE" />
-            <Text layoutX="30.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Font Color" />
+            <Text fx:id="text2" layoutX="30.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Font Color" />
             <Text layoutX="30.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" />
          </children>
       </AnchorPane>
-      <Text layoutX="76.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Background Color" />
+      <Text fx:id="text1" layoutX="76.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Background Color" />
    </children>
 </AnchorPane>

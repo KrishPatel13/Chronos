@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -17,6 +18,7 @@ import observer.Goal;
 public class NewGoalView {
 
     CalendarView calendarView;
+    private Paint colour;
     private Label createGoalLabel = new Label("Create a new goal! Enter a name and point value.");
     private TextField goalNameTextField = new TextField("Name");
     private TextField goalPointsTextField = new TextField("Points");
@@ -30,6 +32,7 @@ public class NewGoalView {
      */
     public NewGoalView(CalendarView calendarView) {
         this.calendarView = calendarView;
+        this.colour = CalendarView.colour;
 
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -38,6 +41,7 @@ public class NewGoalView {
         dialogVbox.setPadding(new Insets(20, 20, 20, 20));
 
         createGoalLabel.setId("createGoalLabel");
+        createGoalLabel.setTextFill(CalendarView.colour_font);
         createGoalLabel.setFont(new Font(16));
         goalNameTextField.setId("goalNameTextField");
         goalNameTextField.setFont(new Font(16));
@@ -46,12 +50,14 @@ public class NewGoalView {
         errorLabel.setId("errorLabel");
         errorLabel.setFont(new Font(16));
         saveButton.setId("saveButton");
+        saveButton.setTextFill(CalendarView.colour_font);
         saveButton.setFont(new Font(16));
-
         saveButton.setOnAction(e -> createGoal());
+        errorLabel.setTextFill(CalendarView.colour_font);
 
         VBox createGoalBox = new VBox(10, createGoalLabel, goalNameTextField, goalPointsTextField, errorLabel, saveButton);
         createGoalBox.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
+
 
         dialogVbox.getChildren().add(createGoalBox);
         dialogVbox.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));

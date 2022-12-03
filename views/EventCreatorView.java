@@ -58,6 +58,10 @@ public class EventCreatorView {
         this.calendarView = calendarView;
         this.colour = CalendarView.colour;
 
+        createEventLabel.setTextFill(CalendarView.colour_font);
+        changeTimeButton.setTextFill(CalendarView.colour_font);
+        saveButton.setTextFill(CalendarView.colour_font);
+
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(calendarView.stage);
@@ -118,6 +122,8 @@ public class EventCreatorView {
                 vbox.getChildren().add(pointTimePicker);
                 vbox.getChildren().add(saveButton);
                 vbox.getChildren().add(errorLabel);
+                errorLabel.setTextFill(CalendarView.colour_font);
+
             }
 
         });
@@ -130,6 +136,7 @@ public class EventCreatorView {
      */
 
     private void createEvent() throws NumberFormatException {
+        errorLabel.setTextFill(CalendarView.colour_font);
 
         // Check if the Event's Name is not empty.
         if (this.nameTextField.getText().trim().isEmpty() || this.nameTextField.getText().trim().isBlank()) {

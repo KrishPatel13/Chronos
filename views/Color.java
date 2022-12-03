@@ -12,19 +12,26 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Color implements Initializable {
     public AnchorPane myPane2;
     public Circle circle2;
+    public Text text1;
+    public Text text2;
+    public AnchorPane myPane;
     @FXML
     private Circle circle;
     @FXML
     private ColorPicker cp;
     @FXML
-    private Pane myPane;
+    private ColorPicker cp2;
+    @FXML
     static CalendarView cv;
+
 
     public void handleColorPicker(ActionEvent actionEvent) {
 
@@ -36,9 +43,14 @@ public class Color implements Initializable {
         myPane.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
     }
     public void handleFontColor(ActionEvent actionEvent) {
-        circle.setFill(cp.getValue());
-        CalendarView.colour_font = cp.getValue();
-
+        circle.setFill(cp2.getValue());
+        CalendarView.colour_font = cp2.getValue();
+        cv.makeEventButton.setTextFill(cp2.getValue());
+        cv.makeGoalButton.setTextFill(cp2.getValue());
+        cv.viewGoalButton.setTextFill(cp2.getValue());
+        cv.changeThemeButton.setTextFill(cp2.getValue());
+        text1.setFill(cp2.getValue());
+        text2.setFill(cp2.getValue());
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -46,6 +58,7 @@ public class Color implements Initializable {
         myPane.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
 
     }
+
 
 
 }
