@@ -209,9 +209,9 @@ public class CalendarView {
 
     private void displayEvents(LocalDateTime time)
     {
-        ArrayList<Event> filteredEvents = this.model.getEventsInTime(time);
+        this.events = this.model.getEventsInTime(time);
         ArrayList<String> eventNames = new ArrayList<>();
-        for (Event e: filteredEvents){
+        for (Event e: this.events){
             eventNames.add(e.getName());
         }
         ObservableList<String> namesToDisplay = FXCollections.observableArrayList(eventNames);
