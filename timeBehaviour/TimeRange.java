@@ -52,4 +52,16 @@ public class TimeRange implements TimeBehaviour {
     public LocalDateTime getTime() {
         return this.startTime;
     }
+
+    @Override
+    public boolean inTime(LocalDateTime time){
+        System.out.println(this.startTime.compareTo(time) < 0);
+        System.out.println(this.endTime.compareTo(time) > 0);
+        if ((this.startTime.compareTo(time) < 0 && this.endTime.compareTo(time) > 0) ||
+                this.startTime.toLocalDate().equals(time.toLocalDate()) ||
+                this.endTime.toLocalDate().equals(time.toLocalDate())){
+            return true;
+        }
+        return false;
+    }
 }

@@ -1,8 +1,6 @@
 package views;
 
 
-import event.Block;
-import event.Deadline;
 import event.Event;
 
 
@@ -123,7 +121,7 @@ public class EventCreatorView {
      * Create a new Event using the parameters given in the text fields and date pickers.
      * Store this new Event in the CalendarModel's list of Events.
      */
-
+    //TODO: Make sure events don't share the same name
     private void createEvent() throws NumberFormatException {
 
         // Check if the Event's Name is not empty.
@@ -176,11 +174,13 @@ public class EventCreatorView {
                 TimeBehaviour tp = new TimePoint(pointTime);
 
                 // Finally, create a new Event with the new TimePoint deadline time of the event.
-                Event e = new Deadline(event_name, event_description, event_points, tp);
+                Event e = new Event(event_name, event_description, event_points, tp);
 
 
                 // Add the event to the events list of CalendarView.model.events
                 this.calendarView.model.addEvent(e);
+
+                this.calendarView.saveModel();
 
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
@@ -204,7 +204,8 @@ public class EventCreatorView {
 
             if (matcher1.find() && matcher.find()) {
                 // match found, valid deadline HH:mm.
-                String yyyy_mm_dd = this.pointDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                String yyyy_mm_dd = this.startDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                String yyyy_mm_dd2 = this.endDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
                 // TODO: Consider the case of  the where the deadline is a past date.
 
@@ -212,20 +213,24 @@ public class EventCreatorView {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 LocalDateTime start_time_block = LocalDateTime.parse(yyyy_mm_dd_HH_mm, formatter);
 
-                String yyyy_mm_dd_HH_mm2 = yyyy_mm_dd + " " + end_time;
+                String yyyy_mm_dd_HH_mm2 = yyyy_mm_dd2 + " " + end_time;
                 DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 LocalDateTime end_time_block = LocalDateTime.parse(yyyy_mm_dd_HH_mm2, formatter2);
+
+                System.out.println(start_time_block + " " + end_time_block);
 
 
                 // Create a TimeRange object.
                 TimeBehaviour tr = new TimeRange(start_time_block, end_time_block);
 
                 // Finally, create a new Event with the new TimeRange start and end time of the event block.
-                Event e = new Block(event_name, event_description, event_points, tr);
+                Event e = new Event(event_name, event_description, event_points, tr);
 
 
                 // Add the event to the events list of CalendarView.model.events
                 this.calendarView.model.addEvent(e);
+
+                this.calendarView.saveModel();
 
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
