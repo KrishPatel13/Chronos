@@ -111,12 +111,6 @@ public class EventEditorView {
     }
 
 
-
-//    //TODO: Implement completeEvent()
-//    private void completeEvent() {
-//    }
-
-
     //TODO: Implement editEvent()
     private void editEvent() {
 
