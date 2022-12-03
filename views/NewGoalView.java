@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
@@ -49,8 +51,10 @@ public class NewGoalView {
         saveButton.setOnAction(e -> createGoal());
 
         VBox createGoalBox = new VBox(10, createGoalLabel, goalNameTextField, goalPointsTextField, errorLabel, saveButton);
+        createGoalBox.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
 
         dialogVbox.getChildren().add(createGoalBox);
+        dialogVbox.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
         Scene dialogScene = new Scene(dialogVbox, 400, 400);
         dialog.setScene(dialogScene);
         dialog.show();
@@ -77,7 +81,6 @@ public class NewGoalView {
 
             Goal goal = new Goal(name, points);
             Event.getObserverList().add(goal);
-            this.calendarView.saveModel();
             errorLabel.setText("Goal " + "\"" + goal.getName() + "\"" + " created!");
 
         }
