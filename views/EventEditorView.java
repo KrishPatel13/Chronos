@@ -11,11 +11,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import timeBehaviour.TimeBehaviour;
 import timeBehaviour.TimePoint;
 import timeBehaviour.TimeRange;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EventEditorView {
 
@@ -70,6 +74,8 @@ public class EventEditorView {
         dialog.show();
         dialog.setAlwaysOnTop(true);
 
+        saveButton.setOnAction(e -> editEvent());
+
         changeTimeButton.setOnAction(e -> changeTime(vbox));
 
         editEventLabel.setText("Edit/Complete Event: " + event.getName());
@@ -89,7 +95,6 @@ public class EventEditorView {
         }
 
 
-
         //If event has a time range:
         else {
             changeTime(vbox);
@@ -102,6 +107,121 @@ public class EventEditorView {
 
             this.startTimePicker.setText(tr.getStartTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).substring(11,16));
             this.endTimePicker.setText(tr.getEndTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).substring(11,16));
+        }
+    }
+
+
+    /**
+     * Edit the details of the event and save accordingly.
+     */
+    private void editEvent() {
+
+        // Check if the Event's Name is not empty.
+        if (this.nameTextField.getText().trim().isEmpty() || this.nameTextField.getText().trim().isBlank()) {
+            this.errorLabel.setText("Please enter the Event Name. It can NOT be Blank!");
+            return;
+        }
+        this.event.setName(this.nameTextField.getText().trim());
+
+
+        // Check if the Event's Description is not empty.
+        if (this.descTextField.getText().trim().isEmpty() || this.descTextField.getText().trim().isBlank()) {
+            this.errorLabel.setText("Please enter the Event's Description. It can NOT be Blank!");
+            return;
+        }
+       this.event.setDescription(this.descTextField.getText().trim());
+
+
+        String points = String.valueOf(this.pointsTextField.getText()).trim();
+        int event_points = 0;
+        // Check if the Event's associated Points are of integer type.
+        try {
+            event_points += Integer.parseInt(points);
+        } catch (NumberFormatException e) {
+            this.errorLabel.setText("Please enter a Integer value for the points associated with the event.");
+            return;
+        }
+        this.event.setPointValue(event_points);
+
+
+
+
+        if (this.endTimePicker.getText().trim().isBlank() || this.endTimePicker.getText().trim().isEmpty() || this.startTimePicker.getText().trim().equals("Start time (hh:mm)") || this.endTimePicker.getText().trim().equals("End time (hh:mm)")) {
+            // Create a new Time Point object based on the deadline of the user.
+
+            String deadline_hours = this.pointTimePicker.getText().trim();
+
+            Pattern pattern = Pattern.compile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+            Matcher matcher = pattern.matcher(deadline_hours);
+            if (matcher.find()) {
+                // match found, valid deadline HH:mm.
+                String yyyy_mm_dd = this.pointDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                // TODO: Consider the case of  the where the deadline is a past date.
+
+                String yyyy_mm_dd_HH_mm = yyyy_mm_dd + " " + deadline_hours;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime pointTime = LocalDateTime.parse(yyyy_mm_dd_HH_mm, formatter);
+
+
+                // Create a TimePoint object.
+                TimeBehaviour tp = new TimePoint(pointTime);
+
+                this.event.setTimeBehaviour(tp);
+
+//                this.calendarView.saveModel();
+
+                //Success Message!
+                this.errorLabel.setText("Event Added to the Calendar!");
+            } else {
+                // Invalid Format of HH:mm
+                this.errorLabel.setText("Please Re-enter the time of the event. Enter in HH:mm format.");
+                return;
+            }
+        } else {
+            // Create a new Time Range object based on the start-time and end-time of the user.
+
+            String start_time = this.startTimePicker.getText().trim();
+            String end_time = this.endTimePicker.getText().trim();
+
+
+            Pattern pattern = Pattern.compile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+
+            Matcher matcher = pattern.matcher(start_time);
+            Matcher matcher1 = pattern.matcher(end_time);
+
+            if (matcher1.find() && matcher.find()) {
+                // match found, valid deadline HH:mm.
+                String yyyy_mm_dd = this.startDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                String yyyy_mm_dd2 = this.endDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                // TODO: Consider the case of  the where the deadline is a past date.
+
+                String yyyy_mm_dd_HH_mm = yyyy_mm_dd + " " + start_time;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime start_time_block = LocalDateTime.parse(yyyy_mm_dd_HH_mm, formatter);
+
+                String yyyy_mm_dd_HH_mm2 = yyyy_mm_dd2 + " " + end_time;
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime end_time_block = LocalDateTime.parse(yyyy_mm_dd_HH_mm2, formatter2);
+
+                System.out.println(start_time_block + " " + end_time_block);
+
+
+                // Create a TimeRange object.
+                TimeBehaviour tr = new TimeRange(start_time_block, end_time_block);
+
+                this.event.setTimeBehaviour(tr);
+//                this.calendarView.saveModel();
+
+                //Success Message!
+                this.errorLabel.setText("Event Added to the Calendar!");
+            } else {
+                // Invalid Format of HH:mm
+                this.errorLabel.setText("Invalid Start/End time of the event. Enter in HH:mm format.");
+                return;
+            }
+
         }
     }
 
@@ -124,8 +244,6 @@ public class EventEditorView {
                 vbox.getChildren().add(startTimePicker);
                 vbox.getChildren().add(endDatePicker);
                 vbox.getChildren().add(endTimePicker);
-                vbox.getChildren().add(saveButton);
-                vbox.getChildren().add(errorLabel);
             } else {
                 vbox.getChildren().remove(startDatePicker);
                 vbox.getChildren().remove(startTimePicker);
@@ -140,9 +258,9 @@ public class EventEditorView {
                 changeTimeButton.setText("Choose start/end time");
                 vbox.getChildren().add(pointDatePicker);
                 vbox.getChildren().add(pointTimePicker);
-                vbox.getChildren().add(saveButton);
-                vbox.getChildren().add(errorLabel);
             }
+            vbox.getChildren().add(saveButton);
+            vbox.getChildren().add(errorLabel);
         }
     }
 }
