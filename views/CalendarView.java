@@ -1,6 +1,8 @@
 package views;
 
 import event.Event;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -13,8 +15,12 @@ import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.CalendarModel;
+import observer.EventObserver;
 
+import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 public class CalendarView {
@@ -26,10 +32,64 @@ public class CalendarView {
             "May", "June", "July", "August",
             "September", "October", "November", "December"};
 
+    ListView<String> eventsView = new ListView<>();
+    ArrayList<Event> events = new ArrayList<>();
+
     public CalendarView(CalendarModel model, Stage stage){
         this.model = model;
+        loadModel();
         this.stage = stage;
         initUI();
+    }
+
+    public void loadModel() {
+        File folder = new File("save/");
+        if (!folder.exists()) {
+            return;
+        }
+        File[] fileList = folder.listFiles();
+        assert fileList != null;
+        for (File f : fileList) {
+            if (f.isFile() && f.getName().equals("model.ser")) {
+                try {
+                    FileInputStream file = new FileInputStream("save/model.ser");
+                    ObjectInputStream in = new ObjectInputStream(file);
+                    ArrayList<Object> loadList = (ArrayList<Object>) in.readObject();
+                    this.model = (CalendarModel) loadList.get(0);
+                    Event.setObserverList((ArrayList<EventObserver>) loadList.get(1));
+                    CalendarModel.setCompletedGoals((ArrayList<EventObserver>) loadList.get(2));
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }
+    }
+
+    public void saveModel() {
+        File folder = new File("save/");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+        File fModel = new File("save/model.ser");
+        ArrayList<Object> saveList = new ArrayList<>();
+        try {
+            saveList.add(this.model);
+            saveList.add(Event.getObserverList());
+            saveList.add(CalendarModel.getCompletedGoals());
+            FileOutputStream fout = new FileOutputStream(fModel);
+            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            oos.writeObject(saveList);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void initUI(){
@@ -59,6 +119,7 @@ public class CalendarView {
         //When a date is selected, update our list of events in the below
         calendar.setOnAction(e ->{
             dateDisplay.setText(calendar.getValue().toString());
+            this.displayEvents(calendar.getValue().atStartOfDay());
         });
 
 
@@ -91,6 +152,7 @@ public class CalendarView {
         changeThemeButton.setScaleX(1.15);
         changeThemeButton.setScaleY(1.15);
         changeThemeButton.setOnAction(e -> {
+            // Configure the Color
 
         });
 
@@ -100,16 +162,36 @@ public class CalendarView {
         buttons.getChildren().addAll(makeEventButton, makeGoalButton, viewGoalButton, changeThemeButton);
         buttons.setPadding(new Insets(20));
 
-        //Create view for goals
-        VBox goalDisplay = new VBox();
-        goalDisplay.setPadding(new Insets(20));
-        ListView<String> goals = new ListView<>();
-        goalDisplay.getChildren().addAll(dateDisplay, goals);
+        //Create buttons for editing and completing events
+        Button editButton = new Button("Edit Event");
+        //editButton.setScaleY(1.15);
+        //editButton.setScaleX(1.15);
+        editButton.setOnAction(e -> {
+
+        });
+
+        Button completeEventButton = new Button("Complete Event");
+        //completeEventButton.setScaleX(1.15);
+        //completeEventButton.setScaleY(1.15);
+        completeEventButton.setOnAction(e -> {
+
+        });
+
+        //Create bar for editing and completing events
+        HBox eventsManaging = new HBox();
+        eventsManaging.getChildren().addAll(editButton, completeEventButton);
+        eventsManaging.setPadding(new Insets(20));
+
+        //Create view for events
+        VBox eventDisplay = new VBox();
+        eventDisplay.setPadding(new Insets(20));
+        this.displayEvents(LocalDateTime.now());
+        eventDisplay.getChildren().addAll(dateDisplay, eventsView, eventsManaging);
 
         //put everything together
         realLayout.setCenter(calendarLayout);
         realLayout.setBottom(buttons);
-        realLayout.setRight(goalDisplay);
+        realLayout.setRight(eventDisplay);
 
 
         //Finally, display everything
@@ -118,6 +200,17 @@ public class CalendarView {
         this.stage.setScene(scene);
         this.stage.show();
 
+    }
+
+    private void displayEvents(LocalDateTime time)
+    {
+        ArrayList<Event> filteredEvents = this.model.getEventsInTime(time);
+        ArrayList<String> eventNames = new ArrayList<>();
+        for (Event e: filteredEvents){
+            eventNames.add(e.getName());
+        }
+        ObservableList<String> namesToDisplay = FXCollections.observableArrayList(eventNames);
+        this.eventsView.setItems(namesToDisplay);
     }
 
 }
