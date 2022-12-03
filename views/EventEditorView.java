@@ -70,11 +70,6 @@ public class EventEditorView {
         dialog.show();
         dialog.setAlwaysOnTop(true);
 
-//        saveButton.setOnAction(e -> editEvent());
-
-//        completeButton.setOnAction(e -> completeEvent());
-
-
         changeTimeButton.setOnAction(e -> changeTime(vbox));
 
         editEventLabel.setText("Edit/Complete Event: " + event.getName());
