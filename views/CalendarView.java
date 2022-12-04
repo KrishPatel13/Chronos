@@ -2,6 +2,8 @@ package views;
 
 
 import event.Event;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -24,6 +26,7 @@ import observer.EventObserver;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -44,12 +47,13 @@ public class CalendarView {
     static Paint colour = javafx.scene.paint.Color.valueOf("#FFFFFF") ;;
     static Paint colour_font = javafx.scene.paint.Color.valueOf("#000000") ;
 
+    ListView<String> eventsView = new ListView<>();
+    ArrayList<Event> events = new ArrayList<>();
+
     public CalendarView(CalendarModel model, Stage stage){
         this.model = model;
         loadModel();
         this.stage = stage;
-        this.calendarLayout = new AnchorPane();
-        this.realLayout = new  BorderPane();
 
         initUI();
     }
@@ -142,6 +146,7 @@ public class CalendarView {
         //When a date is selected, update our list of events in the below
         calendar.setOnAction(e ->{
             dateDisplay.setText(calendar.getValue().toString());
+            this.displayEvents(calendar.getValue().atStartOfDay());
         });
 
 
@@ -249,18 +254,12 @@ public class CalendarView {
         VBox eventDisplay = new VBox();
         eventDisplay.setPadding(new Insets(20));
         this.displayEvents(LocalDateTime.now());
-        eventDisplay.getChildren().addAll(dateDisplay, eventsView, eventsManaging);
+        eventDisplay.getChildren().addAll(dateDisplay, this.eventsView, eventsManaging);
         
-        //Create view for goals
-        VBox goalDisplay = new VBox();
-        goalDisplay.setPadding(new Insets(20));
-        ListView<String> goals = new ListView<>();
-        goalDisplay.getChildren().addAll(dateDisplay, goals);
-
         //put everything together
         realLayout.setCenter(calendarLayout);
         realLayout.setBottom(buttons);
-        realLayout.setRight(goalDisplay);
+        realLayout.setRight(eventDisplay);
 
         this.calendarLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));
         this.realLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));
@@ -271,6 +270,17 @@ public class CalendarView {
 
         this.stage.setScene(scene);
         this.stage.show();
+    }
+
+    private void displayEvents(LocalDateTime time)
+    {
+        this.events = this.model.getEventsInTime(time);
+        ArrayList<String> eventNames = new ArrayList<>();
+        for (Event e: this.events){
+            eventNames.add(e.getName());
+        }
+        ObservableList<String> namesToDisplay = FXCollections.observableArrayList(eventNames);
+        this.eventsView.setItems(namesToDisplay);
     }
   
 
