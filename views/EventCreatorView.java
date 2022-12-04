@@ -1,5 +1,6 @@
 package views;
 
+
 import event.Event;
 
 
@@ -9,10 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -46,7 +44,6 @@ public class EventCreatorView {
     private TextField endTimePicker = new TextField("End time (hh:mm)");
     private Button saveButton = new Button("Save Event");
     private Label errorLabel = new Label("");
-    private Paint colour;
 
 
     /**
@@ -56,11 +53,6 @@ public class EventCreatorView {
      */
     public EventCreatorView(CalendarView calendarView) {
         this.calendarView = calendarView;
-        this.colour = CalendarView.colour;
-
-        createEventLabel.setTextFill(CalendarView.colour_font);
-        changeTimeButton.setTextFill(CalendarView.colour_font);
-        saveButton.setTextFill(CalendarView.colour_font);
 
 
         final Stage dialog = new Stage();
@@ -84,13 +76,10 @@ public class EventCreatorView {
 
         VBox vbox = new VBox(10, createEventLabel, nameTextField, pointsTextField, descTextField, changeTimeButton, pointDatePicker, pointTimePicker, saveButton, errorLabel);
         dialogVbox.getChildren().add(vbox);
-        dialogVbox.setBackground(new Background(new BackgroundFill(colour,null,null)));
         Scene scene = new Scene(dialogVbox, 400, 500);
-        vbox.setBackground(new Background(new BackgroundFill(colour,null,null)));
         dialog.setScene(scene);
         dialog.show();
         dialog.setAlwaysOnTop(true);
-        scene.setFill(colour);
 
         changeTimeButton.setOnAction(e -> {
             if (vbox.getChildren().contains(pointDatePicker)) {
@@ -123,8 +112,6 @@ public class EventCreatorView {
                 vbox.getChildren().add(pointTimePicker);
                 vbox.getChildren().add(saveButton);
                 vbox.getChildren().add(errorLabel);
-                errorLabel.setTextFill(CalendarView.colour_font);
-
             }
 
         });
@@ -135,9 +122,8 @@ public class EventCreatorView {
      * Create a new Event using the parameters given in the text fields and date pickers.
      * Store this new Event in the CalendarModel's list of Events.
      */
-
+    //TODO: Make sure events don't share the same name
     private void createEvent() throws NumberFormatException {
-        errorLabel.setTextFill(CalendarView.colour_font);
 
         // Check if the Event's Name is not empty.
         if (this.nameTextField.getText().trim().isEmpty() || this.nameTextField.getText().trim().isBlank()) {
@@ -195,6 +181,8 @@ public class EventCreatorView {
                 // Add the event to the events list of CalendarView.model.events
                 this.calendarView.model.addEvent(e);
 
+                this.calendarView.saveModel();
+
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
             } else {
@@ -217,7 +205,8 @@ public class EventCreatorView {
 
             if (matcher1.find() && matcher.find()) {
                 // match found, valid deadline HH:mm.
-                String yyyy_mm_dd = this.pointDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                String yyyy_mm_dd = this.startDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                String yyyy_mm_dd2 = this.endDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
                 // TODO: Consider the case of  the where the deadline is a past date.
 
@@ -225,9 +214,11 @@ public class EventCreatorView {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 LocalDateTime start_time_block = LocalDateTime.parse(yyyy_mm_dd_HH_mm, formatter);
 
-                String yyyy_mm_dd_HH_mm2 = yyyy_mm_dd + " " + end_time;
+                String yyyy_mm_dd_HH_mm2 = yyyy_mm_dd2 + " " + end_time;
                 DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 LocalDateTime end_time_block = LocalDateTime.parse(yyyy_mm_dd_HH_mm2, formatter2);
+
+                System.out.println(start_time_block + " " + end_time_block);
 
 
                 // Create a TimeRange object.
@@ -239,6 +230,8 @@ public class EventCreatorView {
 
                 // Add the event to the events list of CalendarView.model.events
                 this.calendarView.model.addEvent(e);
+
+                this.calendarView.saveModel();
 
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
