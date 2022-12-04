@@ -26,6 +26,7 @@ public class CalendarModel implements Serializable {
         return completedGoals;
     }
 
+
     public static void setCompletedGoals(ArrayList<EventObserver> oList) {completedGoals = oList;}
 
     public void addEvent(Event e)

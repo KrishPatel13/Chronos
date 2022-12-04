@@ -28,6 +28,7 @@ public class GoalListView {
     public GoalListView(CalendarView calendarView) {
         this.calendarView = calendarView;
 
+
         final Stage dialog = new Stage();
         Label labelOngoing = new Label("Ongoing goals:");
         labelOngoing.setFont(new Font(16));

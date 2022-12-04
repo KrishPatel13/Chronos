@@ -29,6 +29,7 @@ public class NewGoalView {
     public NewGoalView(CalendarView calendarView) {
         this.calendarView = calendarView;
 
+
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(calendarView.stage);

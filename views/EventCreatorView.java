@@ -54,6 +54,7 @@ public class EventCreatorView {
     public EventCreatorView(CalendarView calendarView) {
         this.calendarView = calendarView;
 
+
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(calendarView.stage);

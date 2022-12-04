@@ -24,6 +24,7 @@ public class GoalCompleteView {
         completeLabel.setFont(f);
         okButton.setFont(f);
 
+
         okButton.setOnAction(e -> {
             dialog.close();
         });

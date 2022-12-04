@@ -123,6 +123,7 @@ public class CalendarView {
         });
 
 
+
         //Create the button to make events
         Button makeEventButton = new Button("Make Event");
         makeEventButton.setScaleX(1.15);

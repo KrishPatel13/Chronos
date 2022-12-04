@@ -25,6 +25,7 @@ public class EventEditorView {
 
     private CalendarView calendarView;
     private Event event;
+
     private Label editEventLabel = new Label("");
     private Button completeButton = new Button("Complete!");
     private TextField nameTextField = new TextField("");
