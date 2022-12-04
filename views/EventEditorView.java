@@ -27,7 +27,8 @@ public class EventEditorView {
     private Event event;
 
     private Label editEventLabel = new Label("");
-    private Button completeButton = new Button("Complete!");
+
+//    private Button completeButton = new Button("Complete!");
     private TextField nameTextField = new TextField("");
     private TextField pointsTextField = new TextField("");
     private TextField descTextField = new TextField("");
@@ -68,7 +69,7 @@ public class EventEditorView {
         saveButton.setFont(f);
         errorLabel.setFont(f);
 
-        VBox vbox = new VBox(10, editEventLabel, completeButton, nameTextField, pointsTextField, descTextField, changeTimeButton, pointDatePicker, pointTimePicker, saveButton, errorLabel);
+        VBox vbox = new VBox(10, editEventLabel, nameTextField, pointsTextField, descTextField, changeTimeButton, pointDatePicker, pointTimePicker, saveButton, errorLabel);
         dialogVbox.getChildren().add(vbox);
         Scene scene = new Scene(dialogVbox, 400, 500);
         dialog.setScene(scene);
@@ -79,7 +80,7 @@ public class EventEditorView {
 
         changeTimeButton.setOnAction(e -> changeTime(vbox));
 
-        editEventLabel.setText("Edit/Complete Event: " + event.getName());
+        editEventLabel.setText("Edit Event: " + event.getName());
         nameTextField.setText(event.getName());
         pointsTextField.setText(String.valueOf(event.getPointValue()));
         descTextField.setText(event.getDescription());
