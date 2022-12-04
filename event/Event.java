@@ -43,6 +43,7 @@ public class Event implements Serializable {
         this.timeBehaviour = t;
     }
 
+
     // REMINDER: Complete this once we have a working Calendar & view
     /**
      * Set this Event as "completed", and notify observers.

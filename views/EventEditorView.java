@@ -7,8 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
@@ -27,8 +25,10 @@ public class EventEditorView {
 
     private CalendarView calendarView;
     private Event event;
+
     private Label editEventLabel = new Label("");
-    private Button completeButton = new Button("Complete!");
+
+//    private Button completeButton = new Button("Complete!");
     private TextField nameTextField = new TextField("");
     private TextField pointsTextField = new TextField("");
     private TextField descTextField = new TextField("");
@@ -69,9 +69,8 @@ public class EventEditorView {
         saveButton.setFont(f);
         errorLabel.setFont(f);
 
-        VBox vbox = new VBox(10, editEventLabel, completeButton, nameTextField, pointsTextField, descTextField, changeTimeButton, pointDatePicker, pointTimePicker, saveButton, errorLabel);
+        VBox vbox = new VBox(10, editEventLabel, nameTextField, pointsTextField, descTextField, changeTimeButton, pointDatePicker, pointTimePicker, saveButton, errorLabel);
         dialogVbox.getChildren().add(vbox);
-        dialogVbox.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
         Scene scene = new Scene(dialogVbox, 400, 500);
         dialog.setScene(scene);
         dialog.show();
@@ -81,7 +80,7 @@ public class EventEditorView {
 
         changeTimeButton.setOnAction(e -> changeTime(vbox));
 
-        editEventLabel.setText("Edit/Complete Event: " + event.getName());
+        editEventLabel.setText("Edit Event: " + event.getName());
         nameTextField.setText(event.getName());
         pointsTextField.setText(String.valueOf(event.getPointValue()));
         descTextField.setText(event.getDescription());
@@ -124,8 +123,6 @@ public class EventEditorView {
             this.errorLabel.setText("Please enter the Event Name. It can NOT be Blank!");
             return;
         }
-
-
         // Check if the event name is already in the events list.
         else
         {
@@ -191,6 +188,7 @@ public class EventEditorView {
 
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
+                this.calendarView.saveModel();
             } else {
                 // Invalid Format of HH:mm
                 this.errorLabel.setText("Please Re-enter the time of the event. Enter in HH:mm format.");
@@ -234,6 +232,8 @@ public class EventEditorView {
 
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
+
+                this.calendarView.saveModel();
             } else {
                 // Invalid Format of HH:mm
                 this.errorLabel.setText("Invalid Start/End time of the event. Enter in HH:mm format.");

@@ -22,9 +22,7 @@ public class GoalCompleteView {
         completeLabel.setText("Congratulations! You completed your goal: " + o.getName());
         Font f = new Font(16);
         completeLabel.setFont(f);
-        okButton.setTextFill(CalendarView.colour_font);
         okButton.setFont(f);
-        completeLabel.setTextFill(CalendarView.colour_font);
 
 
         okButton.setOnAction(e -> {

@@ -29,6 +29,7 @@ public class CalendarModel implements Serializable {
         return completedGoals;
     }
 
+
     public static void setCompletedGoals(ArrayList<EventObserver> oList) {completedGoals = oList;}
 
     public void addEvent(Event e)
@@ -44,6 +45,7 @@ public class CalendarModel implements Serializable {
         ArrayList<Event> filteredEvents = new ArrayList<>();
         for (Event e: this.events){
             if (e.getTime().inTime(time)){
+                System.out.println(e.getName());
                 filteredEvents.add(e);
             }
         }
