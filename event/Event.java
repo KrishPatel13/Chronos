@@ -8,19 +8,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Event implements Serializable {
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getPointValue() {
-        return pointValue;
-    }
-
     private String name; //Title that indicates what the event is. This shows on the calendar.
     private String description; //More detailed description of the event.
     private int pointValue; //How many points are awarded upon completion?
@@ -61,12 +48,16 @@ public class Event implements Serializable {
      * Set this Event as "completed", and notify observers.
      */
     public void complete() {
+        ArrayList<EventObserver> completed = new ArrayList<>();
         for (EventObserver o : observerList) {
             if (o.addPoints(this.pointValue)) {
                 GoalCompleteView gcv = new GoalCompleteView((Goal) o);
                 CalendarModel.getCompletedGoals().add(o);
-                observerList.remove(o);
+                completed.add(o);
             }
+        }
+        for (EventObserver o : completed) {
+            observerList.remove(o);
         }
     }
 
@@ -91,8 +82,6 @@ public class Event implements Serializable {
     }
 
 
-    public TimeBehaviour getTime(){return this.timeBehaviour;}
-
 
     /**
      * Set the list of observers for events. Useful for loading files.
@@ -100,5 +89,36 @@ public class Event implements Serializable {
      * @param oList the list of observers.
      */
     public static void setObserverList(ArrayList<EventObserver> oList) { observerList = oList; }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getPointValue() {
+        return pointValue;
+    }
+
+    public TimeBehaviour getTime(){return this.timeBehaviour;}
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPointValue(int pointValue) {
+        this.pointValue = pointValue;
+    }
+
+    public void setTimeBehaviour(TimeBehaviour timeBehaviour) {
+        this.timeBehaviour = timeBehaviour;
+    }
 
 }
