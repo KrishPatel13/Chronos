@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
@@ -69,6 +71,7 @@ public class EventEditorView {
 
         VBox vbox = new VBox(10, editEventLabel, completeButton, nameTextField, pointsTextField, descTextField, changeTimeButton, pointDatePicker, pointTimePicker, saveButton, errorLabel);
         dialogVbox.getChildren().add(vbox);
+        dialogVbox.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
         Scene scene = new Scene(dialogVbox, 400, 500);
         dialog.setScene(scene);
         dialog.show();
