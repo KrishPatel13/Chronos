@@ -129,6 +129,19 @@ public class EventCreatorView {
             this.errorLabel.setText("Please enter the Event Name. It can NOT be Blank!");
             return;
         }
+        // Check if the event name is already in the events list.
+        else
+        {
+            String temp = this.nameTextField.getText().trim();
+            for(Event i: this.calendarView.events)
+            {
+                if (temp.equals(i.getName()))
+                {
+                    this.errorLabel.setText("Event Name already taken!");
+                    return;
+                }
+            }
+        }
         String event_name = this.nameTextField.getText().trim();
 
 

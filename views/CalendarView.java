@@ -164,8 +164,8 @@ public class CalendarView {
 
         //Create buttons for editing and completing events
         Button editButton = new Button("Edit Event");
-        editButton.setScaleY(1.15);
-        editButton.setScaleX(1.15);
+//        editButton.setScaleY(1.15);
+//        editButton.setScaleX(1.15);
         editButton.setOnAction(e -> {
             if (this.eventsView.getSelectionModel().getSelectedItem() != null){
 
