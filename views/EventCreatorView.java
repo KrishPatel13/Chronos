@@ -122,7 +122,6 @@ public class EventCreatorView {
      * Create a new Event using the parameters given in the text fields and date pickers.
      * Store this new Event in the CalendarModel's list of Events.
      */
-    //TODO: Make sure events don't share the same name
     private void createEvent() throws NumberFormatException {
 
         // Check if the Event's Name is not empty.
@@ -130,8 +129,19 @@ public class EventCreatorView {
             this.errorLabel.setText("Please enter the Event Name. It can NOT be Blank!");
             return;
         }
+        else
+        {
+            String temp = this.nameTextField.getText().trim();
+            for(Event i: this.calendarView.events)
+            {
+                if (temp.equals(i.getName()))
+                {
+                    this.errorLabel.setText("Event Name already taken!");
+                    return;
+                }
+            }
+        }
         String event_name = this.nameTextField.getText().trim();
-
 
         // Check if the Event's Description is not empty.
         if (this.descTextField.getText().trim().isEmpty() || this.descTextField.getText().trim().isBlank()) {

@@ -122,8 +122,6 @@ public class EventEditorView {
             this.errorLabel.setText("Please enter the Event Name. It can NOT be Blank!");
             return;
         }
-
-
         // Check if the event name is already in the events list.
         else
         {
