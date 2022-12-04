@@ -41,6 +41,7 @@ public class Color implements Initializable {
 
         CalendarView.colour = cp.getValue();
         myPane.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
+        cv.saveModel();
     }
     public void handleFontColor(ActionEvent actionEvent) {
         circle.setFill(cp2.getValue());
@@ -51,6 +52,7 @@ public class Color implements Initializable {
         cv.changeThemeButton.setTextFill(cp2.getValue());
         text1.setFill(cp2.getValue());
         text2.setFill(cp2.getValue());
+        cv.saveModel();
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

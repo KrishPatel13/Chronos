@@ -20,9 +20,11 @@ import javafx.stage.Stage;
 //import Main;
 import javafx.stage.StageStyle;
 import model.CalendarModel;
+import observer.EventObserver;
 
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 public class CalendarView {
@@ -39,16 +41,77 @@ public class CalendarView {
     Button makeGoalButton;
     Button changeThemeButton;
     Button viewGoalButton;
-    static Paint colour;
+    static Paint colour = javafx.scene.paint.Color.valueOf("#FFFFFF") ;;
     static Paint colour_font = javafx.scene.paint.Color.valueOf("#000000") ;
 
     public CalendarView(CalendarModel model, Stage stage){
         this.model = model;
+        loadModel();
         this.stage = stage;
         this.calendarLayout = new AnchorPane();
         this.realLayout = new  BorderPane();
 
         initUI();
+    }
+
+    /**
+     * Loads the model from save/model.ser.
+     */
+    public void loadModel() {
+        File folder = new File("save/");
+        if (!folder.exists()) {
+            return;
+        }
+        File[] fileList = folder.listFiles();
+        assert fileList != null;
+        for (File f : fileList) {
+            if (f.isFile() && f.getName().equals("model.ser")) {
+                try {
+                    FileInputStream file = new FileInputStream("save/model.ser");
+                    ObjectInputStream in = new ObjectInputStream(file);
+                    ArrayList<Object> loadList = (ArrayList<Object>) in.readObject();
+                    this.model = (CalendarModel) loadList.get(0);
+                    Event.setObserverList((ArrayList<EventObserver>) loadList.get(1));
+                    CalendarModel.setCompletedGoals((ArrayList<EventObserver>) loadList.get(2));
+                    CalendarView.colour = javafx.scene.paint.Color.valueOf(this.model.colour);
+                    CalendarView.colour_font = javafx.scene.paint.Color.valueOf(this.model.colour_font);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }
+    }
+
+    /**
+     * Saves the model to save/model.ser
+     */
+    public void saveModel() {
+        this.model.colour = colour.toString();
+        this.model.colour_font = colour_font.toString();
+        File folder = new File("save/");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+        File fModel = new File("save/model.ser");
+        ArrayList<Object> saveList = new ArrayList<>();
+        try {
+            saveList.add(this.model);
+            saveList.add(Event.getObserverList());
+            saveList.add(CalendarModel.getCompletedGoals());
+            FileOutputStream fout = new FileOutputStream(fModel);
+            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            oos.writeObject(saveList);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
     private void initUI(){
         this.stage.setTitle("Chronos");
@@ -148,6 +211,9 @@ public class CalendarView {
         realLayout.setCenter(calendarLayout);
         realLayout.setBottom(buttons);
         realLayout.setRight(goalDisplay);
+
+        this.calendarLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));
+        this.realLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));
 
 
         //Finally, display everything

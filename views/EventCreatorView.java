@@ -194,6 +194,8 @@ public class EventCreatorView {
                 // Add the event to the events list of CalendarView.model.events
                 this.calendarView.model.addEvent(e);
 
+                this.calendarView.saveModel();
+
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
             } else {
@@ -238,6 +240,8 @@ public class EventCreatorView {
 
                 // Add the event to the events list of CalendarView.model.events
                 this.calendarView.model.addEvent(e);
+
+                this.calendarView.saveModel();
 
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");

@@ -1,6 +1,7 @@
 package model;
 
 import event.Event;
+import javafx.scene.paint.Paint;
 import observer.EventObserver;
 
 
@@ -12,6 +13,8 @@ import java.util.Calendar;
 
 public class CalendarModel implements Serializable {
     ArrayList<Event> events;
+    public String colour;
+    public String colour_font;
     private static ArrayList<EventObserver> completedGoals = new ArrayList<>();
 
     public CalendarModel(){
