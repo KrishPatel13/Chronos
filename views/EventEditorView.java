@@ -188,6 +188,7 @@ public class EventEditorView {
 
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
+                this.calendarView.saveModel();
             } else {
                 // Invalid Format of HH:mm
                 this.errorLabel.setText("Please Re-enter the time of the event. Enter in HH:mm format.");
@@ -231,6 +232,8 @@ public class EventEditorView {
 
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
+
+                this.calendarView.saveModel();
             } else {
                 // Invalid Format of HH:mm
                 this.errorLabel.setText("Invalid Start/End time of the event. Enter in HH:mm format.");
