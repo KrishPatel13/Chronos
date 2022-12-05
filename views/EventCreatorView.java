@@ -19,6 +19,7 @@ import timeBehaviour.TimeBehaviour;
 import timeBehaviour.TimePoint;
 import timeBehaviour.TimeRange;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,6 +45,8 @@ public class EventCreatorView {
     private TextField endTimePicker = new TextField("End time (hh:mm)");
     private Button saveButton = new Button("Save Event");
     private Label errorLabel = new Label("");
+
+    private Paint colour;
 
 
     /**
