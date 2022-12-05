@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
@@ -26,6 +28,8 @@ import java.time.LocalDate;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static views.CalendarView.colour;
 
 
 public class EventCreatorView {
@@ -59,6 +63,7 @@ public class EventCreatorView {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(calendarView.stage);
         VBox dialogVbox = new VBox(20);
+        dialogVbox.setBackground(new Background(new BackgroundFill(colour,null,null)));
         dialogVbox.setPadding(new Insets(20, 20, 20, 20));
 
         Font f = new Font(16);
@@ -68,9 +73,17 @@ public class EventCreatorView {
         descTextField.setFont(f);
         changeTimeButton.setFont(f);
         pointTimePicker.setFont(f);
+        pointDatePicker.setValue(this.calendarView.calendar.getValue());
         startTimePicker.setFont(f);
+        startDatePicker.setValue(this.calendarView.calendar.getValue());
+        endDatePicker.setValue(this.calendarView.calendar.getValue());
         endTimePicker.setFont(f);
         saveButton.setFont(f);
+
+
+        createEventLabel.setTextFill(CalendarView.colour_font);
+        changeTimeButton.setTextFill(CalendarView.colour_font);
+        saveButton.setTextFill(CalendarView.colour_font);
 
         saveButton.setOnAction(e -> createEvent());
 
@@ -87,7 +100,7 @@ public class EventCreatorView {
                 vbox.getChildren().remove(pointTimePicker);
                 vbox.getChildren().remove(saveButton);
                 vbox.getChildren().remove(errorLabel);
-                pointDatePicker.setValue(LocalDate.now());
+                pointDatePicker.setValue(this.calendarView.calendar.getValue());
                 pointTimePicker.setText("Time (hh:mm)");
                 changeTimeButton.setText("Choose single time");
                 vbox.getChildren().add(startDatePicker);
@@ -103,9 +116,9 @@ public class EventCreatorView {
                 vbox.getChildren().remove(endTimePicker);
                 vbox.getChildren().remove(saveButton);
                 vbox.getChildren().remove(errorLabel);
-                startDatePicker.setValue(LocalDate.now());
+                startDatePicker.setValue(this.calendarView.calendar.getValue());
                 startTimePicker.setText("Start time (hh:mm)");
-                endDatePicker.setValue(LocalDate.now());
+                endDatePicker.setValue(this.calendarView.calendar.getValue());
                 endTimePicker.setText("End time (hh:mm)");
                 changeTimeButton.setText("Choose start/end time");
                 vbox.getChildren().add(pointDatePicker);

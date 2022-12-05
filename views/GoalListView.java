@@ -1,5 +1,7 @@
 package views;
 
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import model.CalendarModel;
 import event.Event;
 import javafx.collections.FXCollections;
@@ -15,6 +17,8 @@ import javafx.stage.Stage;
 import observer.EventObserver;
 
 import java.util.ArrayList;
+
+import static views.CalendarView.colour;
 
 public class GoalListView {
 
@@ -32,8 +36,10 @@ public class GoalListView {
         final Stage dialog = new Stage();
         Label labelOngoing = new Label("Ongoing goals:");
         labelOngoing.setFont(new Font(16));
+        labelOngoing.setTextFill(CalendarView.colour_font);
         Label labelComplete = new Label("Completed goals:");
         labelComplete.setFont(new Font(16));
+        labelComplete.setTextFill(CalendarView.colour_font);
 
         ArrayList<String> goalsOngoingList = new ArrayList<>();
         for (EventObserver o : Event.getObserverList()) {
@@ -62,6 +68,7 @@ public class GoalListView {
         HBox hbox = new HBox(20);
         hbox.setPadding(new Insets(20, 20, 20, 20));
         hbox.getChildren().addAll(vboxOngoing, vboxComplete);
+        hbox.setBackground(new Background(new BackgroundFill(colour,null,null)));
 
         Scene scene = new Scene(hbox, 400, 400);
         dialog.setScene(scene);

@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
@@ -20,6 +22,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static views.CalendarView.colour;
 
 public class EventEditorView {
 
@@ -68,6 +72,12 @@ public class EventEditorView {
         endTimePicker.setFont(f);
         saveButton.setFont(f);
         errorLabel.setFont(f);
+
+        saveButton.setTextFill(CalendarView.colour_font);
+        editEventLabel.setTextFill(CalendarView.colour_font);
+        changeTimeButton.setTextFill(CalendarView.colour_font);
+        errorLabel.setTextFill(CalendarView.colour_font);
+        dialogVbox.setBackground(new Background(new BackgroundFill(colour,null,null)));
 
         VBox vbox = new VBox(10, editEventLabel, nameTextField, pointsTextField, descTextField, changeTimeButton, pointDatePicker, pointTimePicker, saveButton, errorLabel);
         dialogVbox.getChildren().add(vbox);

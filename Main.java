@@ -4,7 +4,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
 import model.CalendarModel;
 import views.CalendarView;
-
+import views.Color;
 
 public class Main extends Application
 {

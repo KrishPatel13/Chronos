@@ -44,12 +44,15 @@ public class Color implements Initializable {
         cv.saveModel();
     }
     public void handleFontColor(ActionEvent actionEvent) {
-        circle.setFill(cp2.getValue());
+        circle2.setFill(cp2.getValue());
         CalendarView.colour_font = cp2.getValue();
         cv.makeEventButton.setTextFill(cp2.getValue());
         cv.makeGoalButton.setTextFill(cp2.getValue());
         cv.viewGoalButton.setTextFill(cp2.getValue());
         cv.changeThemeButton.setTextFill(cp2.getValue());
+        cv.editButton.setTextFill(cp2.getValue());
+        cv.completeEventButton.setTextFill(cp2.getValue());
+        cv.dateDisplay.setTextFill(cp2.getValue());
         text1.setFill(cp2.getValue());
         text2.setFill(cp2.getValue());
         cv.saveModel();

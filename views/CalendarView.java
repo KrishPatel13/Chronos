@@ -44,6 +44,16 @@ public class CalendarView {
     Button makeGoalButton;
     Button changeThemeButton;
     Button viewGoalButton;
+
+    DatePicker calendar;
+
+    DatePickerSkin calendarSkin;
+
+    Node calendarDisplay;
+    Button editButton;
+
+    Label dateDisplay;
+    Button completeEventButton;
     static Paint colour = javafx.scene.paint.Color.valueOf("#FFFFFF") ;;
     static Paint colour_font = javafx.scene.paint.Color.valueOf("#000000") ;
 
@@ -54,7 +64,8 @@ public class CalendarView {
         this.model = model;
         loadModel();
         this.stage = stage;
-
+        this.calendarLayout = new AnchorPane();
+        this.realLayout = new BorderPane();
         initUI();
     }
 
@@ -128,9 +139,9 @@ public class CalendarView {
 
         //make a DatePicker for our calendar, and then set up a display that keeps
         // the calendar always active
-        DatePicker calendar = new DatePicker(LocalDate.now());
-        DatePickerSkin calendarSkin = new DatePickerSkin(calendar);
-        Node calendarDisplay = calendarSkin.getPopupContent();
+        calendar = new DatePicker(LocalDate.now());
+        calendarSkin = new DatePickerSkin(calendar);
+        calendarDisplay = calendarSkin.getPopupContent();
         calendarDisplay.setScaleX(1.5);
         calendarDisplay.setScaleY(1.5);
         calendarDisplay.setLayoutX(100);
@@ -141,8 +152,10 @@ public class CalendarView {
 //        calendarLayout.setBackground();
 
         //Create the label to display the date
-        Label dateDisplay = new Label(calendar.getValue().toString());
-
+        this.dateDisplay = new Label(calendar.getValue().toString());
+        dateDisplay.setTextFill(colour_font);
+        dateDisplay.setFont(new Font(20));
+        dateDisplay.setAlignment(Pos.TOP_CENTER);
         //When a date is selected, update our list of events in the below
         calendar.setOnAction(e ->{
             dateDisplay.setText(calendar.getValue().toString());
@@ -157,6 +170,7 @@ public class CalendarView {
         makeEventButton.setScaleY(1.15);
         makeEventButton.setOnAction(e -> {
             EventCreatorView ecv = new EventCreatorView(this);
+            this.displayEvents(calendar.getValue().atStartOfDay());
         });
 
         //Create the button to make goals
@@ -208,9 +222,10 @@ public class CalendarView {
 
 
         //Create buttons for editing and completing events
-        Button editButton = new Button("Edit Event");
+        this.editButton = new Button("Edit Event");
 //        editButton.setScaleY(1.15);
 //        editButton.setScaleX(1.15);
+        this.editButton.setTextFill(colour_font);
         editButton.setOnAction(e -> {
             if (this.eventsView.getSelectionModel().getSelectedItem() != null){
 
@@ -228,7 +243,8 @@ public class CalendarView {
             }
         });
 
-        Button completeEventButton = new Button("Complete Event");
+        this.completeEventButton = new Button("Complete Event");
+        this.completeEventButton.setTextFill(colour_font);
         //completeEventButton.setScaleX(1.15);
         //completeEventButton.setScaleY(1.15);
         completeEventButton.setOnAction(e -> {
@@ -237,11 +253,18 @@ public class CalendarView {
                 return;
             }
             //int index = 0;
+            Event completed = null;
             for (Event event: this.events){
                 if (event.getName() == eventName){
-                    event.complete();
-                    //this.events.remove(event);
+                    completed = event;
+                    completed.complete();
+                    break;
                 }
+            }
+            if (!(completed == null)){
+                this.events.remove(completed);
+                this.model.getAllEvents().remove(completed);
+                this.saveModel();
             }
         });
 
