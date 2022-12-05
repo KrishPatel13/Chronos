@@ -76,6 +76,5 @@ public class GoalListView {
         dialog.setScene(scene);
         dialog.show();
         dialog.setAlwaysOnTop(true);
-
     }
 }

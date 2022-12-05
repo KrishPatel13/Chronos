@@ -56,11 +56,11 @@ public class EventCreatorView {
      */
     public EventCreatorView(CalendarView calendarView) {
         this.calendarView = calendarView;
-        this.colour = CalendarView.colour;
+        this.colour = CalendarView.colour; //
 
-        createEventLabel.setTextFill(CalendarView.colour_font);
-        changeTimeButton.setTextFill(CalendarView.colour_font);
-        saveButton.setTextFill(CalendarView.colour_font);
+        createEventLabel.setTextFill(CalendarView.colour_font); //
+        changeTimeButton.setTextFill(CalendarView.colour_font); //
+        saveButton.setTextFill(CalendarView.colour_font); //
 
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
