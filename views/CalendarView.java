@@ -187,7 +187,7 @@ public class CalendarView {
             Scene scene = null;
             try {
 //                scene = new Scene(fxmlLoader.load());
-                Parent root1  = (Parent) fxmlLoader.load();
+                Parent root1  = (Parent) fxmlLoader.load(); // TODO: Error Source
                 Stage stage = new Stage();
 //                stage.initModality(Modality.APPLICATION_MODAL);
 //                stage.initStyle(StageStyle.UNDECORATED);
