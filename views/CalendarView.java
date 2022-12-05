@@ -1,21 +1,32 @@
 package views;
 
 import event.Event;
+import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.skin.DatePickerSkin;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.CalendarModel;
 import observer.EventObserver;
+import javafx.scene.layout.*;
+import javafx.stage.StageStyle;
+
 
 import java.io.*;
 import java.time.LocalDate;
@@ -28,9 +39,20 @@ public class CalendarView {
     Stage stage;
     CalendarModel model;
 
+    AnchorPane calendarLayout;
+    BorderPane realLayout;
+
     String[] months = {"January", "February", "March", "April",
             "May", "June", "July", "August",
             "September", "October", "November", "December"};
+
+    Button makeEventButton;
+    Button makeGoalButton;
+    Button changeThemeButton;
+    Button viewGoalButton;
+    static Paint colour;
+    static Paint colour_font = javafx.scene.paint.Color.valueOf("#000000") ;
+
     ListView<String> eventsView = new ListView<>();
     ArrayList<Event> events = new ArrayList<>();
 
@@ -38,6 +60,9 @@ public class CalendarView {
         this.model = model;
         loadModel();
         this.stage = stage;
+        this.calendarLayout = new AnchorPane();
+        this.realLayout = new  BorderPane();
+
         initUI();
     }
 
@@ -94,11 +119,12 @@ public class CalendarView {
     private void initUI(){
         this.stage.setTitle("Chronos");
 
+
         //Make core screen
         //HBox screen = new HBox(8);
-        AnchorPane calendarLayout = new AnchorPane();
+        this.calendarLayout = new AnchorPane();
         //AnchorPane goalDisplay = new AnchorPane();
-        BorderPane realLayout = new BorderPane();
+        this.realLayout = new BorderPane();
 
         //make a DatePicker for our calendar, and then set up a display that keeps
         // the calendar always active
@@ -124,7 +150,7 @@ public class CalendarView {
 
 
         //Create the button to make events
-        Button makeEventButton = new Button("Make Event");
+        this.makeEventButton = new Button("Make Event");
         makeEventButton.setScaleX(1.15);
         makeEventButton.setScaleY(1.15);
         makeEventButton.setOnAction(e -> {
@@ -132,7 +158,7 @@ public class CalendarView {
         });
 
         //Create the button to make goals
-        Button makeGoalButton = new Button("Make Goal");
+        this.makeGoalButton = new Button("Make Goal");
         makeGoalButton.setScaleX(1.15);
         makeGoalButton.setScaleY(1.15);
         makeGoalButton.setOnAction(e -> {
@@ -140,7 +166,7 @@ public class CalendarView {
         });
 
         //Create the button to view
-        Button viewGoalButton = new Button("View Goal");
+        this.viewGoalButton = new Button("View Goal");
         viewGoalButton.setScaleX(1.15);
         viewGoalButton.setScaleY(1.15);
         viewGoalButton.setOnAction(e -> {
@@ -148,12 +174,27 @@ public class CalendarView {
         });
 
         //Create Button for changing the theme
-        Button changeThemeButton = new Button("Change Theme");
+        this.changeThemeButton = new Button("Change Theme");
+        changeThemeButton.setTextFill(colour_font);
         changeThemeButton.setScaleX(1.15);
         changeThemeButton.setScaleY(1.15);
         changeThemeButton.setOnAction(e -> {
             // Configure the Color
-
+            FXMLLoader fxmlLoader = new FXMLLoader(CalendarView.class.getResource("ColorPick.fxml"));
+            Scene scene = null;
+            try {
+//                scene = new Scene(fxmlLoader.load());
+                Parent root1  = (Parent) fxmlLoader.load(); // error here
+                Stage stage = new Stage();
+//                stage.initModality(Modality.APPLICATION_MODAL);
+//                stage.initStyle(StageStyle.UNDECORATED);
+                stage.setTitle("Chronos");
+                stage.setScene(new Scene(root1));
+                stage.show();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            Color.cv = this;
         });
 
         //Create button bar
@@ -211,10 +252,16 @@ public class CalendarView {
         this.displayEvents(LocalDateTime.now());
         eventDisplay.getChildren().addAll(dateDisplay, eventsView, eventsManaging);
 
+        //Create view for goals
+        VBox goalDisplay = new VBox();
+        goalDisplay.setPadding(new Insets(20));
+        ListView<String> goals = new ListView<>();
+        goalDisplay.getChildren().addAll(dateDisplay, goals);
+
         //put everything together
         realLayout.setCenter(calendarLayout);
         realLayout.setBottom(buttons);
-        realLayout.setRight(eventDisplay);
+        realLayout.setRight(goalDisplay);
 
 
         //Finally, display everything
