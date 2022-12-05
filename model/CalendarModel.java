@@ -45,6 +45,7 @@ public class CalendarModel implements Serializable {
         ArrayList<Event> filteredEvents = new ArrayList<>();
         for (Event e: this.events){
             if (e.getTime().inTime(time)){
+                System.out.println(e.getName());
                 filteredEvents.add(e);
             }
         }
