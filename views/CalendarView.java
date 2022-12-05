@@ -72,6 +72,7 @@ public class CalendarView {
         this.stage = stage;
         this.calendarLayout = new AnchorPane();
         this.realLayout = new BorderPane();
+
         initUI();
     }
 
@@ -150,6 +151,7 @@ public class CalendarView {
         calendarDisplay.setLayoutY(100);
         calendarLayout.getChildren().add(calendarDisplay);
         calendarLayout.setPrefSize(400, 400);
+        calendarLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));
 
         //Create the label to display the date
         this.dateDisplay = new Label(calendar.getValue().toString());
@@ -291,6 +293,8 @@ public class CalendarView {
         realLayout.setCenter(calendarLayout);
         realLayout.setBottom(buttons);
         realLayout.setRight(eventDisplay);
+        realLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));
+
 
 //        realLayout.setRight(goalDisplay);
 
