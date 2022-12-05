@@ -2,6 +2,7 @@ package views;
 
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Paint;
 import model.CalendarModel;
 import event.Event;
 import javafx.collections.FXCollections;
@@ -23,6 +24,7 @@ import static views.CalendarView.colour;
 public class GoalListView {
 
     CalendarView calendarView;
+    private Paint colour;
 
     /**
      * Constructor
@@ -31,7 +33,7 @@ public class GoalListView {
      */
     public GoalListView(CalendarView calendarView) {
         this.calendarView = calendarView;
-
+        this.colour = CalendarView.colour;
 
         final Stage dialog = new Stage();
         Label labelOngoing = new Label("Ongoing goals:");
@@ -60,20 +62,21 @@ public class GoalListView {
         VBox vboxOngoing = new VBox(20);
         vboxOngoing.setPadding(new Insets(20, 20, 20, 20));
         vboxOngoing.getChildren().addAll(labelOngoing, listViewOngoing);
+        vboxOngoing.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
 
         VBox vboxComplete = new VBox(20);
         vboxComplete.setPadding(new Insets(20, 20, 20, 20));
         vboxComplete.getChildren().addAll(labelComplete, listViewComplete);
+        vboxComplete.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
 
         HBox hbox = new HBox(20);
         hbox.setPadding(new Insets(20, 20, 20, 20));
         hbox.getChildren().addAll(vboxOngoing, vboxComplete);
-        hbox.setBackground(new Background(new BackgroundFill(colour,null,null)));
+        hbox.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
 
         Scene scene = new Scene(hbox, 400, 400);
         dialog.setScene(scene);
         dialog.show();
         dialog.setAlwaysOnTop(true);
-
-    }
+        }
 }

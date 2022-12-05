@@ -1,10 +1,9 @@
 package views;
 
-
 import event.Event;
+import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,17 +11,22 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.skin.DatePickerSkin;
-import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
-//import Main;
-import javafx.stage.StageStyle;
 import model.CalendarModel;
 import observer.EventObserver;
+import javafx.scene.layout.*;
+import javafx.stage.StageStyle;
+
 
 import java.io.*;
 import java.time.LocalDate;
@@ -31,6 +35,7 @@ import java.util.ArrayList;
 
 
 public class CalendarView {
+
     Stage stage;
     CalendarModel model;
 
@@ -40,6 +45,7 @@ public class CalendarView {
     String[] months = {"January", "February", "March", "April",
             "May", "June", "July", "August",
             "September", "October", "November", "December"};
+
     Button makeEventButton;
     Button makeGoalButton;
     Button changeThemeButton;
@@ -69,9 +75,6 @@ public class CalendarView {
         initUI();
     }
 
-    /**
-     * Loads the model from save/model.ser.
-     */
     public void loadModel() {
         File folder = new File("save/");
         if (!folder.exists()) {
@@ -102,9 +105,6 @@ public class CalendarView {
         }
     }
 
-    /**
-     * Saves the model to save/model.ser
-     */
     public void saveModel() {
         this.model.colour = colour.toString();
         this.model.colour_font = colour_font.toString();
@@ -128,8 +128,10 @@ public class CalendarView {
         }
 
     }
+
     private void initUI(){
         this.stage.setTitle("Chronos");
+
 
         //Make core screen
         //HBox screen = new HBox(8);
@@ -149,8 +151,6 @@ public class CalendarView {
         calendarLayout.getChildren().add(calendarDisplay);
         calendarLayout.setPrefSize(400, 400);
 
-//        calendarLayout.setBackground();
-
         //Create the label to display the date
         this.dateDisplay = new Label(calendar.getValue().toString());
         dateDisplay.setTextFill(colour_font);
@@ -163,11 +163,12 @@ public class CalendarView {
         });
 
 
+
         //Create the button to make events
         this.makeEventButton = new Button("Make Event");
-        makeEventButton.setTextFill(colour_font);
         makeEventButton.setScaleX(1.15);
         makeEventButton.setScaleY(1.15);
+        makeEventButton.setTextFill(colour_font);
         makeEventButton.setOnAction(e -> {
             EventCreatorView ecv = new EventCreatorView(this);
             this.displayEvents(calendar.getValue().atStartOfDay());
@@ -175,18 +176,18 @@ public class CalendarView {
 
         //Create the button to make goals
         this.makeGoalButton = new Button("Make Goal");
-        makeGoalButton.setTextFill(colour_font);
         makeGoalButton.setScaleX(1.15);
         makeGoalButton.setScaleY(1.15);
+        makeGoalButton.setTextFill(colour_font);
         makeGoalButton.setOnAction(e -> {
             NewGoalView ngv = new NewGoalView(this);
         });
 
         //Create the button to view
         this.viewGoalButton = new Button("View Goal");
-        viewGoalButton.setTextFill(colour_font);
         viewGoalButton.setScaleX(1.15);
         viewGoalButton.setScaleY(1.15);
+        viewGoalButton.setTextFill(colour_font);
         viewGoalButton.setOnAction(e -> {
             GoalListView glv = new GoalListView(this);
         });
@@ -197,11 +198,13 @@ public class CalendarView {
         changeThemeButton.setScaleX(1.15);
         changeThemeButton.setScaleY(1.15);
         changeThemeButton.setOnAction(e -> {
+            // Configure the Color
             FXMLLoader fxmlLoader = new FXMLLoader(CalendarView.class.getResource("ColorPick.fxml"));
             Scene scene = null;
             try {
 //                scene = new Scene(fxmlLoader.load());
-                Parent root1  = (Parent) fxmlLoader.load();
+
+                Parent root1  = (Parent) fxmlLoader.load(); // TODO: Error Source
                 Stage stage = new Stage();
 //                stage.initModality(Modality.APPLICATION_MODAL);
 //                stage.initStyle(StageStyle.UNDECORATED);
@@ -219,7 +222,6 @@ public class CalendarView {
         buttons.setPadding(new Insets(30));
         buttons.getChildren().addAll(makeEventButton, makeGoalButton, viewGoalButton, changeThemeButton);
         buttons.setPadding(new Insets(20));
-
 
         //Create buttons for editing and completing events
         this.editButton = new Button("Edit Event");
@@ -277,22 +279,27 @@ public class CalendarView {
         VBox eventDisplay = new VBox();
         eventDisplay.setPadding(new Insets(20));
         this.displayEvents(LocalDateTime.now());
-        eventDisplay.getChildren().addAll(dateDisplay, this.eventsView, eventsManaging);
-        
+        eventDisplay.getChildren().addAll(dateDisplay, eventsView, eventsManaging);
+
+        //Create view for goals
+//        VBox goalDisplay = new VBox();
+//        goalDisplay.setPadding(new Insets(20));
+//        ListView<String> goals = new ListView<>();
+//        goalDisplay.getChildren().addAll(dateDisplay, goals);
+
         //put everything together
         realLayout.setCenter(calendarLayout);
         realLayout.setBottom(buttons);
         realLayout.setRight(eventDisplay);
 
-        this.calendarLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));
-        this.realLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));
-
+//        realLayout.setRight(goalDisplay);
 
         //Finally, display everything
         Scene scene = new Scene(realLayout);
 
         this.stage.setScene(scene);
         this.stage.show();
+
     }
 
     private void displayEvents(LocalDateTime time)
@@ -305,6 +312,5 @@ public class CalendarView {
         ObservableList<String> namesToDisplay = FXCollections.observableArrayList(eventNames);
         this.eventsView.setItems(namesToDisplay);
     }
-  
 
 }
