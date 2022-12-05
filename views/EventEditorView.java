@@ -127,7 +127,7 @@ public class EventEditorView {
         else
         {
             String temp = this.nameTextField.getText().trim();
-            for(Event i: this.calendarView.events)
+            for(Event i: this.calendarView.model.getAllEvents())
             {
                 if (temp.equals(i.getName()))
                 {

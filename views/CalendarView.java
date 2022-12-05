@@ -253,16 +253,17 @@ public class CalendarView {
         eventDisplay.getChildren().addAll(dateDisplay, eventsView, eventsManaging);
 
         //Create view for goals
-        VBox goalDisplay = new VBox();
-        goalDisplay.setPadding(new Insets(20));
-        ListView<String> goals = new ListView<>();
-        goalDisplay.getChildren().addAll(dateDisplay, goals);
+//        VBox goalDisplay = new VBox();
+//        goalDisplay.setPadding(new Insets(20));
+//        ListView<String> goals = new ListView<>();
+//        goalDisplay.getChildren().addAll(dateDisplay, goals);
 
         //put everything together
         realLayout.setCenter(calendarLayout);
         realLayout.setBottom(buttons);
-        realLayout.setRight(goalDisplay);
+        realLayout.setRight(eventDisplay);
 
+//        realLayout.setRight(goalDisplay);
 
         //Finally, display everything
         Scene scene = new Scene(realLayout);

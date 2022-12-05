@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import model.CalendarModel;
 import timeBehaviour.TimeBehaviour;
 import timeBehaviour.TimePoint;
 import timeBehaviour.TimeRange;
@@ -32,6 +33,8 @@ import java.util.regex.Pattern;
 public class EventCreatorView {
 
     CalendarView calendarView;
+
+//    CalendarModel calendarModel;
     private Label createEventLabel = new Label("Create a new event!");
     private TextField nameTextField = new TextField("Name");
     private TextField pointsTextField = new TextField("Points");
@@ -57,6 +60,7 @@ public class EventCreatorView {
     public EventCreatorView(CalendarView calendarView) {
         this.calendarView = calendarView;
 
+//        this.calendarModel = this.calendarView.model;
 
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -97,8 +101,6 @@ public class EventCreatorView {
                 vbox.getChildren().add(startTimePicker);
                 vbox.getChildren().add(endDatePicker);
                 vbox.getChildren().add(endTimePicker);
-                vbox.getChildren().add(saveButton);
-                vbox.getChildren().add(errorLabel);
             } else {
                 vbox.getChildren().remove(startDatePicker);
                 vbox.getChildren().remove(startTimePicker);
@@ -113,9 +115,9 @@ public class EventCreatorView {
                 changeTimeButton.setText("Choose start/end time");
                 vbox.getChildren().add(pointDatePicker);
                 vbox.getChildren().add(pointTimePicker);
-                vbox.getChildren().add(saveButton);
-                vbox.getChildren().add(errorLabel);
             }
+            vbox.getChildren().add(saveButton);
+            vbox.getChildren().add(errorLabel);
 
         });
 
@@ -135,7 +137,7 @@ public class EventCreatorView {
         else
         {
             String temp = this.nameTextField.getText().trim();
-            for(Event i: this.calendarView.events)
+            for(Event i: this.calendarView.model.getAllEvents())
             {
                 if (temp.equals(i.getName()))
                 {
@@ -195,10 +197,12 @@ public class EventCreatorView {
                 this.calendarView.model.addEvent(e);
 
                 this.calendarView.saveModel();
-
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
-            } else {
+
+            }
+            else
+            {
                 // Invalid Format of HH:mm
                 this.errorLabel.setText("Please Re-enter the time of the event. Enter in HH:mm format.");
                 return;
