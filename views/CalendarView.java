@@ -36,43 +36,74 @@ import java.util.ArrayList;
 
 public class CalendarView {
 
+    //Below defines all the components we'll need
+
+    //The main root
     Stage stage;
+
+    //The model that stores event information
     CalendarModel model;
 
+    //The sublayout that contains our calendar
     AnchorPane calendarLayout;
+
+    //The overall layout that contains everything
     BorderPane realLayout;
 
-    String[] months = {"January", "February", "March", "April",
-            "May", "June", "July", "August",
-            "September", "October", "November", "December"};
-
+    //Buttons used for functionality
     Button makeEventButton;
     Button makeGoalButton;
     Button changeThemeButton;
     Button viewGoalButton;
 
+    //The calendar used to access events
     DatePicker calendar;
 
+    //A wrapper class used to help display the calendar in a better way
     DatePickerSkin calendarSkin;
 
+    // A node that takes the calendar and makes it always visible
     Node calendarDisplay;
     Button editButton;
 
+    //Label showing the selected date
     Label dateDisplay;
     Button completeEventButton;
+
+    //Variables for getting the background and text color to change window theme
     static Paint colour = javafx.scene.paint.Color.valueOf("#FFFFFF") ;;
     static Paint colour_font = javafx.scene.paint.Color.valueOf("#000000") ;
 
+    // ListView to display event names for a specific date
     ListView<String> eventsView = new ListView<>();
+
+    // List to store events for a given date
     ArrayList<Event> events = new ArrayList<>();
 
-    public CalendarView(CalendarModel model, Stage stage){
+    // static instance
+    static CalendarView instance;
+
+    //Method to implement singleton design pattern
+    public static CalendarView getView(CalendarModel model, Stage stage){
+        if (instance == null){
+            instance = new CalendarView(model, stage);
+        }
+        return instance;
+    }
+
+    private CalendarView(CalendarModel model, Stage stage){
+        // Get a model
         this.model = model;
+
+        // load stored model info
         loadModel();
         this.stage = stage;
+
+        // Set up the layouts
         this.calendarLayout = new AnchorPane();
         this.realLayout = new BorderPane();
 
+        // Create the UI
         initUI();
     }
 
@@ -131,13 +162,13 @@ public class CalendarView {
     }
 
     private void initUI(){
+
+        // set the title of the screen
         this.stage.setTitle("Chronos");
 
 
         //Make core screen
-        //HBox screen = new HBox(8);
         this.calendarLayout = new AnchorPane();
-        //AnchorPane goalDisplay = new AnchorPane();
         this.realLayout = new BorderPane();
 
         //make a DatePicker for our calendar, and then set up a display that keeps
@@ -163,8 +194,6 @@ public class CalendarView {
             dateDisplay.setText(calendar.getValue().toString());
             this.displayEvents(calendar.getValue().atStartOfDay());
         });
-
-
 
         //Create the button to make events
         this.makeEventButton = new Button("Make Event");
@@ -227,8 +256,6 @@ public class CalendarView {
 
         //Create buttons for editing and completing events
         this.editButton = new Button("Edit Event");
-//        editButton.setScaleY(1.15);
-//        editButton.setScaleX(1.15);
         this.editButton.setTextFill(colour_font);
         editButton.setOnAction(e -> {
             if (this.eventsView.getSelectionModel().getSelectedItem() != null){
@@ -249,8 +276,6 @@ public class CalendarView {
 
         this.completeEventButton = new Button("Complete Event");
         this.completeEventButton.setTextFill(colour_font);
-        //completeEventButton.setScaleX(1.15);
-        //completeEventButton.setScaleY(1.15);
         completeEventButton.setOnAction(e -> {
             String eventName = this.eventsView.getSelectionModel().getSelectedItem();
             if (eventName == null){
@@ -283,11 +308,6 @@ public class CalendarView {
         this.displayEvents(LocalDateTime.now());
         eventDisplay.getChildren().addAll(dateDisplay, eventsView, eventsManaging);
 
-        //Create view for goals
-//        VBox goalDisplay = new VBox();
-//        goalDisplay.setPadding(new Insets(20));
-//        ListView<String> goals = new ListView<>();
-//        goalDisplay.getChildren().addAll(dateDisplay, goals);
 
         //put everything together
         realLayout.setCenter(calendarLayout);
@@ -296,23 +316,27 @@ public class CalendarView {
         realLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));
 
 
-//        realLayout.setRight(goalDisplay);
 
         //Finally, display everything
         Scene scene = new Scene(realLayout);
-
         this.stage.setScene(scene);
         this.stage.show();
 
     }
 
+    //Method to display events in the event list
     private void displayEvents(LocalDateTime time)
     {
+        //Get events that match the date
         this.events = this.model.getEventsInTime(time);
+
+        //Get their names
         ArrayList<String> eventNames = new ArrayList<>();
         for (Event e: this.events){
             eventNames.add(e.getName());
         }
+
+        //Set the ListView to contain those names
         ObservableList<String> namesToDisplay = FXCollections.observableArrayList(eventNames);
         this.eventsView.setItems(namesToDisplay);
     }

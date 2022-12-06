@@ -21,7 +21,7 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception 
     {
-        this.view = new CalendarView(new CalendarModel(),primaryStage);
+        this.view = CalendarView.getView(new CalendarModel(),primaryStage);
     }
     
 }

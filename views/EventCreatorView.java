@@ -31,9 +31,6 @@ import java.util.regex.Pattern;
  */
 public class EventCreatorView {
     private final CalendarView calendarView; // the calendar view
-    private final TextField nameTextField = new TextField(""); // the name of the event
-    private final TextField pointsTextField = new TextField(""); // the points associated with the event
-    private final TextField descTextField = new TextField(""); // the description of the event
     private final Button changeTimeButton = new Button("Choose start/end time"); // Button for changing the type of time of the event
     private final DatePicker pointDatePicker = new DatePicker(LocalDate.now()); // DatePicker for TimePoint event
     private final TextField pointTimePicker = new TextField("Time (hh:mm)"); // Deadline time for TimePoint event
@@ -44,6 +41,9 @@ public class EventCreatorView {
     private final Button saveButton = new Button("Save Changes"); // Button for Saving the edited event
     private final Label errorLabel = new Label(""); // the error message to display
 
+    private final TextField nameTextField = new TextField("Name"); // the name of the event
+    private final TextField pointsTextField = new TextField("Points"); // the points associated with the event
+    private final TextField descTextField = new TextField("Description"); // the description of the event
 
     /**
      * Constructor for the EventCreatorView Class.

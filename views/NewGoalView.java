@@ -93,6 +93,7 @@ public class NewGoalView {
 
             Goal goal = new Goal(name, points);
             Event.getObserverList().add(goal);
+            this.calendarView.saveModel();
             errorLabel.setText("Goal " + "\"" + goal.getName() + "\"" + " created!");
 
         }
