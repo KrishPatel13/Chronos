@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 public class GoalTests {
 
     @Test
@@ -14,11 +15,13 @@ public class GoalTests {
         assertEquals("goalA: 35/50", goalA.toString());
     }
 
+
     @Test
     public void goalCompleteTest() {
         Goal goalB = new Goal("goalB", 60);
         assertEquals(true, goalB.addPoints(60));
     }
+
 
     @Test
     public void testGoalToString() {
