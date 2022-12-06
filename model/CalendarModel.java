@@ -51,7 +51,9 @@ public class CalendarModel implements Serializable {
         return this.events;
     }
 
-    // get events filtered by a date
+    /**
+     * get events filtered by a date
+     */
     public ArrayList<Event> getEventsInTime(LocalDateTime time)
     {
         ArrayList<Event> filteredEvents = new ArrayList<>();
