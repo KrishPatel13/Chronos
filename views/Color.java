@@ -2,48 +2,65 @@ package views;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Color implements Initializable {
-    public AnchorPane myPane2;
-    public Circle circle2;
-    public Text text1;
-    public Text text2;
-    public AnchorPane myPane;
+
+/**
+ * Short class description here
+ *
+ */
+public class Color implements Initializable
+{
+    public AnchorPane myPane2; //
+    public Circle circle2; //
+    public Text text1; // //
+    public Text text2; //
+    public AnchorPane myPane; //
     @FXML
-    private Circle circle;
+    private Circle circle; //
     @FXML
-    private ColorPicker cp;
+    private ColorPicker cp; //
     @FXML
-    private ColorPicker cp2;
+    private ColorPicker cp2; //
     @FXML
-    static CalendarView cv;
+    static CalendarView cv; //
 
 
-    public void handleColorPicker(ActionEvent actionEvent) {
-
+    /**
+     * Write ehre
+     *
+     * @param actionEvent write here
+     */
+    public void handleColorPicker(ActionEvent actionEvent)
+    {
+        // write hree
         circle.setFill(cp.getValue());
         cv.calendarLayout.setBackground(new Background(new BackgroundFill(cp.getValue(),null,null)));
         cv.realLayout.setBackground(new Background(new BackgroundFill(cp.getValue(),null,null)));
 
+        // write here
         CalendarView.colour = cp.getValue();
         myPane.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
         cv.saveModel();
     }
+
+
+    /**
+     * write here
+     *
+     * @param actionEvent write ehre
+     */
     public void handleFontColor(ActionEvent actionEvent) {
+        // Colour Picker UI
         circle2.setFill(cp2.getValue());
         CalendarView.colour_font = cp2.getValue();
         cv.makeEventButton.setTextFill(cp2.getValue());
@@ -57,13 +74,18 @@ public class Color implements Initializable {
         text2.setFill(cp2.getValue());
         cv.saveModel();
     }
+
+
+    /**
+     * write here
+     *
+     * @param url write here
+     * @param resourceBundle write here
+     */
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
         cp.getStyleClass().add(ColorPicker.STYLE_CLASS_SPLIT_BUTTON);
         myPane.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
-
     }
-
-
-
 }
