@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6c7dd9da-18ec-4f73-9ba5-bc918f8349db" name="Changes" comment="Sanity Tests(new file EventTest.java added) for Event.java">
+      <change beforePath="$PROJECT_DIR$/event/EventTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/event/EventTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="feature/1.6-edit-events" />
+                <branch-info repo="$PROJECT_DIR$" source="develop" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/1.7-save/load" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2ITCEiNVvc1QeEVO4syng9S20E7" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "OverrideImplement.generate.javadoc": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "true",
+    "Repository.Attach.Sources": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "last_opened_file_path": "C:/Program Files/Java/javafx-sdk-19/lib/javafx.web.jar",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Krish Patel\CSC207  Group Project\The-Hamburglars\views" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="event" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.EventTest.completeTest">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="The-Hamburglars" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$PROJECT_DIR$/../../../../Program Files/Java/javafx-sdk-19/lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EventTest.completeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="The-Hamburglars" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="event.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="event" />
+      <option name="MAIN_CLASS_NAME" value="event.EventTest" />
+      <option name="METHOD_NAME" value="completeTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.EventTest.completeTest" />
+        <item itemvalue="JUnit.EventTest.completeTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6c7dd9da-18ec-4f73-9ba5-bc918f8349db" name="Changes" comment="" />
+      <created>1670196080350</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1670196080350</updated>
+    </task>
+    <task id="LOCAL-00001" summary="trying to resolve the pull request #18">
+      <created>1670196204060</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1670196204060</updated>
+    </task>
+    <task id="LOCAL-00002" summary="trying to resolve the pull request #18">
+      <created>1670206682055</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670206682055</updated>
+    </task>
+    <task id="LOCAL-00003" summary="trying to resolve the pull request #18">
+      <created>1670206705213</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670206705213</updated>
+    </task>
+    <task id="LOCAL-00004" summary="trying to resolve the pull request #18">
+      <created>1670207851422</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670207851422</updated>
+    </task>
+    <task id="LOCAL-00005" summary="trying to resolve the pull request #18">
+      <created>1670208160992</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670208160992</updated>
+    </task>
+    <task id="LOCAL-00006" summary="trying to resolve the pull request #18">
+      <created>1670208221179</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1670208221179</updated>
+    </task>
+    <task id="LOCAL-00007" summary="trying to resolve the pull request #18">
+      <created>1670271801156</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1670271801156</updated>
+    </task>
+    <task id="LOCAL-00008" summary="trying to resolve the pull request #18">
+      <created>1670293721600</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1670293721600</updated>
+    </task>
+    <task id="LOCAL-00009" summary="trying to resolve the pull request #18">
+      <created>1670294233740</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1670294233740</updated>
+    </task>
+    <task id="LOCAL-00010" summary="trying to resolve the pull request #18">
+      <created>1670294261598</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1670294261598</updated>
+    </task>
+    <task id="LOCAL-00011" summary="trying to resolve the pull request #18">
+      <created>1670294270682</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1670294270682</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Documented Event.java">
+      <created>1670296532056</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1670296532056</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Documented Event.java">
+      <created>1670296634352</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1670296634352</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Documented TimeBehaviour package (3 files)">
+      <created>1670298185503</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1670298185503</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Documented TimeBehaviour package (3 files)">
+      <created>1670298414800</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1670298414800</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Documented EventEditorView.java">
+      <created>1670300088349</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1670300088349</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Documented EventEditorView.java">
+      <created>1670300193277</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1670300193277</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Documented Event.java">
+      <created>1670300361479</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1670300361479</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Documented EventCreatorView.java and EventEditorView.java">
+      <created>1670301402985</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1670301402985</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Documented EventObserver.java">
+      <created>1670301546025</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1670301546025</updated>
+    </task>
+    <task id="LOCAL-00021" summary="mionr changes">
+      <created>1670301613680</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1670301613680</updated>
+    </task>
+    <task id="LOCAL-00022" summary="mionr changes">
+      <created>1670301687358</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1670301687358</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Documented Main.java">
+      <created>1670357759550</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1670357759550</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Documented EventCreatorView.java">
+      <created>1670357974075</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1670357974075</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Sanity Tests(new file EventTest.java added) for Event.java">
+      <created>1670358230141</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1670358230141</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Sanity Tests(new file EventTest.java added) for Event.java">
+      <created>1670358811724</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1670358811724</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Sanity Tests(new file EventTest.java added) for Event.java">
+      <created>1670358989758</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1670358989758</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="trying to resolve the pull request #18" />
+    <MESSAGE value="Documented TimeBehaviour package (3 files)" />
+    <MESSAGE value="Documented EventEditorView.java" />
+    <MESSAGE value="Documented Event.java" />
+    <MESSAGE value="Documented EventCreatorView.java and EventEditorView.java" />
+    <MESSAGE value="Documented EventObserver.java" />
+    <MESSAGE value="mionr changes" />
+    <MESSAGE value="Documented Main.java" />
+    <MESSAGE value="Documented EventCreatorView.java" />
+    <MESSAGE value="Sanity Tests(new file EventTest.java added) for Event.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sanity Tests(new file EventTest.java added) for Event.java" />
+  </component>
+</project>

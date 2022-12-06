@@ -1,0 +1,25 @@
+Index: .idea/libraries/javafx_graphics.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"libraryTable\">\r\n  <library name=\"javafx.graphics\">\r\n    <CLASSES>\r\n      <root url=\"jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.graphics.jar!/\" />\r\n      <root url=\"jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.media.jar!/\" />\r\n      <root url=\"jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.web.jar!/\" />\r\n      <root url=\"jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.controls.jar!/\" />\r\n      <root url=\"jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.fxml.jar!/\" />\r\n      <root url=\"jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.swing.jar!/\" />\r\n      <root url=\"jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.base.jar!/\" />\r\n      <root url=\"jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx-swt.jar!/\" />\r\n    </CLASSES>\r\n    <JAVADOC />\r\n    <SOURCES />\r\n  </library>\r\n</component>
+===================================================================
+diff --git a/.idea/libraries/javafx_graphics.xml b/.idea/libraries/javafx_graphics.xml
+--- a/.idea/libraries/javafx_graphics.xml	
++++ b/.idea/libraries/javafx_graphics.xml	
+@@ -1,15 +1,6 @@
+ <component name="libraryTable">
+   <library name="javafx.graphics">
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.graphics.jar!/" />
+-      <root url="jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.media.jar!/" />
+-      <root url="jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.web.jar!/" />
+-      <root url="jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.controls.jar!/" />
+-      <root url="jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.fxml.jar!/" />
+-      <root url="jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.swing.jar!/" />
+-      <root url="jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx.base.jar!/" />
+-      <root url="jar://$USER_HOME$/Downloads/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib/javafx-swt.jar!/" />
+-    </CLASSES>
++    <CLASSES />
+     <JAVADOC />
+     <SOURCES />
+   </library>

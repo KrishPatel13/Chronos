@@ -1,0 +1,139 @@
+Index: out/production/The-Hamburglars/.idea/libraries/javafx_web.xml
+===================================================================
+diff --git a/out/production/The-Hamburglars/.idea/libraries/javafx_web.xml b/out/production/The-Hamburglars/.idea/libraries/javafx_web.xml
+deleted file mode 100644
+--- a/out/production/The-Hamburglars/.idea/libraries/javafx_web.xml	
++++ /dev/null	
+@@ -1,16 +0,0 @@
+-<component name="libraryTable">
+-  <library name="javafx.web">
+-    <CLASSES>
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.web.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.swing.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.media.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.graphics.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.fxml.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.controls.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.base.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx-swt.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/javafx.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/javafx.xml b/.idea/libraries/javafx.xml
+deleted file mode 100644
+--- a/.idea/libraries/javafx.xml	
++++ /dev/null	
+@@ -1,16 +0,0 @@
+-<component name="libraryTable">
+-  <library name="javafx">
+-    <CLASSES>
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.web.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.swing.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.media.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.graphics.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.fxml.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.controls.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.base.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx-swt.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: out/production/The-Hamburglars/.idea/libraries/javafx.xml
+===================================================================
+diff --git a/out/production/The-Hamburglars/.idea/libraries/javafx.xml b/out/production/The-Hamburglars/.idea/libraries/javafx.xml
+deleted file mode 100644
+--- a/out/production/The-Hamburglars/.idea/libraries/javafx.xml	
++++ /dev/null	
+@@ -1,16 +0,0 @@
+-<component name="libraryTable">
+-  <library name="javafx">
+-    <CLASSES>
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.web.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.swing.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.media.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.graphics.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.fxml.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.controls.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx.base.jar!/" />
+-      <root url="jar://$PROJECT_DIR$/../../../Program Files/Java/javafx-sdk-19/lib/javafx-swt.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: out/production/The-Hamburglars/ColorPick.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/production/The-Hamburglars/ColorPick.fxml b/out/production/The-Hamburglars/ColorPick.fxml
+deleted file mode 100644
+--- a/out/production/The-Hamburglars/ColorPick.fxml	
++++ /dev/null	
+@@ -1,12 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.scene.control.ColorPicker?>
+-<?import javafx.scene.layout.AnchorPane?>
+-<?import javafx.scene.shape.Circle?>
+-
+-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="334.0" prefWidth="262.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Color">
+-   <children>
+-      <ColorPicker fx:id="cp" layoutX="40.0" layoutY="32.0" onAction="#handleColorPicker" />
+-      <Circle fx:id="circle" fill="DODGERBLUE" layoutX="120.0" layoutY="174.0" radius="53.0" stroke="BLACK" strokeType="INSIDE" />
+-   </children>
+-</AnchorPane>
+Index: .idea/libraries/javafx_swt.xml
+===================================================================
+diff --git a/.idea/libraries/javafx_swt.xml b/.idea/libraries/javafx_swt.xml
+new file mode 100644
+--- /dev/null	
++++ b/.idea/libraries/javafx_swt.xml	
+@@ -0,0 +1,16 @@
++<component name="libraryTable">
++  <library name="javafx-swt">
++    <CLASSES>
++      <root url="jar://$PROJECT_DIR$/../../../../Program Files/Java/javafx-sdk-19/lib/javafx-swt.jar!/" />
++      <root url="jar://$PROJECT_DIR$/../../../../Program Files/Java/javafx-sdk-19/lib/javafx.base.jar!/" />
++      <root url="jar://$PROJECT_DIR$/../../../../Program Files/Java/javafx-sdk-19/lib/javafx.controls.jar!/" />
++      <root url="jar://$PROJECT_DIR$/../../../../Program Files/Java/javafx-sdk-19/lib/javafx.fxml.jar!/" />
++      <root url="jar://$PROJECT_DIR$/../../../../Program Files/Java/javafx-sdk-19/lib/javafx.graphics.jar!/" />
++      <root url="jar://$PROJECT_DIR$/../../../../Program Files/Java/javafx-sdk-19/lib/javafx.media.jar!/" />
++      <root url="jar://$PROJECT_DIR$/../../../../Program Files/Java/javafx-sdk-19/lib/javafx.swing.jar!/" />
++      <root url="jar://$PROJECT_DIR$/../../../../Program Files/Java/javafx-sdk-19/lib/javafx.web.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: The-Hamburglars.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n    <orderEntry type=\"library\" name=\"The-Hamburglars\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"javafx.graphics\" level=\"project\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/The-Hamburglars.iml b/The-Hamburglars.iml
+--- a/The-Hamburglars.iml	
++++ b/The-Hamburglars.iml	
+@@ -9,5 +9,6 @@
+     <orderEntry type="sourceFolder" forTests="false" />
+     <orderEntry type="library" name="The-Hamburglars" level="project" />
+     <orderEntry type="library" name="javafx.graphics" level="project" />
++    <orderEntry type="library" name="javafx-swt" level="project" />
+   </component>
+ </module>
+\ No newline at end of file

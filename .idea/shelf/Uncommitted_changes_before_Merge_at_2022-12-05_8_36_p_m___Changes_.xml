@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Merge_at_2022-12-05_8_36_p_m__[Changes]" date="1670290593202" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2022-12-05_8_36_p_m__[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Merge at 2022-12-05 8:36 p.m. [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/The-Hamburglars/save/model.ser" />
+    <option name="AFTER_PATH" value="out/production/The-Hamburglars/save/model.ser" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2022-12-05_8_36_p_m__[Changes]/model.ser" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="save/model.ser" />
+    <option name="AFTER_PATH" value="save/model.ser" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2022-12-05_8_36_p_m__[Changes]/model1.ser" />
+  </binary>
+</changelist>
