@@ -3,6 +3,7 @@ package timeBehaviour;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+
 /**
  * A TimeBehaviour interface.
  */
