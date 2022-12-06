@@ -19,6 +19,8 @@ import observer.EventObserver;
 
 import java.util.ArrayList;
 
+import static views.CalendarView.colour;
+
 public class GoalListView {
 
     CalendarView calendarView;

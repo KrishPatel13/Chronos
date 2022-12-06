@@ -50,7 +50,17 @@ public class CalendarView {
     Button makeGoalButton;
     Button changeThemeButton;
     Button viewGoalButton;
-    static Paint colour;
+
+    DatePicker calendar;
+
+    DatePickerSkin calendarSkin;
+
+    Node calendarDisplay;
+    Button editButton;
+
+    Label dateDisplay;
+    Button completeEventButton;
+    static Paint colour = javafx.scene.paint.Color.valueOf("#FFFFFF") ;;
     static Paint colour_font = javafx.scene.paint.Color.valueOf("#000000") ;
 
     ListView<String> eventsView = new ListView<>();
@@ -61,7 +71,7 @@ public class CalendarView {
         loadModel();
         this.stage = stage;
         this.calendarLayout = new AnchorPane();
-        this.realLayout = new  BorderPane();
+        this.realLayout = new BorderPane();
 
         initUI();
     }
@@ -82,6 +92,8 @@ public class CalendarView {
                     this.model = (CalendarModel) loadList.get(0);
                     Event.setObserverList((ArrayList<EventObserver>) loadList.get(1));
                     CalendarModel.setCompletedGoals((ArrayList<EventObserver>) loadList.get(2));
+                    CalendarView.colour = javafx.scene.paint.Color.valueOf(this.model.colour);
+                    CalendarView.colour_font = javafx.scene.paint.Color.valueOf(this.model.colour_font);
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 } catch (IOException e) {
@@ -95,6 +107,8 @@ public class CalendarView {
     }
 
     public void saveModel() {
+        this.model.colour = colour.toString();
+        this.model.colour_font = colour_font.toString();
         File folder = new File("save/");
         if (!folder.exists()) {
             folder.mkdir();
@@ -128,19 +142,22 @@ public class CalendarView {
 
         //make a DatePicker for our calendar, and then set up a display that keeps
         // the calendar always active
-        DatePicker calendar = new DatePicker(LocalDate.now());
-        DatePickerSkin calendarSkin = new DatePickerSkin(calendar);
-        Node calendarDisplay = calendarSkin.getPopupContent();
+        calendar = new DatePicker(LocalDate.now());
+        calendarSkin = new DatePickerSkin(calendar);
+        calendarDisplay = calendarSkin.getPopupContent();
         calendarDisplay.setScaleX(1.5);
         calendarDisplay.setScaleY(1.5);
         calendarDisplay.setLayoutX(100);
         calendarDisplay.setLayoutY(100);
         calendarLayout.getChildren().add(calendarDisplay);
         calendarLayout.setPrefSize(400, 400);
+        calendarLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));
 
         //Create the label to display the date
-        Label dateDisplay = new Label(calendar.getValue().toString());
-
+        this.dateDisplay = new Label(calendar.getValue().toString());
+        dateDisplay.setTextFill(colour_font);
+        dateDisplay.setFont(new Font(20));
+        dateDisplay.setAlignment(Pos.TOP_CENTER);
         //When a date is selected, update our list of events in the below
         calendar.setOnAction(e ->{
             dateDisplay.setText(calendar.getValue().toString());
@@ -153,14 +170,17 @@ public class CalendarView {
         this.makeEventButton = new Button("Make Event");
         makeEventButton.setScaleX(1.15);
         makeEventButton.setScaleY(1.15);
+        makeEventButton.setTextFill(colour_font);
         makeEventButton.setOnAction(e -> {
             EventCreatorView ecv = new EventCreatorView(this);
+            this.displayEvents(calendar.getValue().atStartOfDay());
         });
 
         //Create the button to make goals
         this.makeGoalButton = new Button("Make Goal");
         makeGoalButton.setScaleX(1.15);
         makeGoalButton.setScaleY(1.15);
+        makeGoalButton.setTextFill(colour_font);
         makeGoalButton.setOnAction(e -> {
             NewGoalView ngv = new NewGoalView(this);
         });
@@ -169,6 +189,7 @@ public class CalendarView {
         this.viewGoalButton = new Button("View Goal");
         viewGoalButton.setScaleX(1.15);
         viewGoalButton.setScaleY(1.15);
+        viewGoalButton.setTextFill(colour_font);
         viewGoalButton.setOnAction(e -> {
             GoalListView glv = new GoalListView(this);
         });
@@ -205,9 +226,10 @@ public class CalendarView {
         buttons.setPadding(new Insets(20));
 
         //Create buttons for editing and completing events
-        Button editButton = new Button("Edit Event");
+        this.editButton = new Button("Edit Event");
 //        editButton.setScaleY(1.15);
 //        editButton.setScaleX(1.15);
+        this.editButton.setTextFill(colour_font);
         editButton.setOnAction(e -> {
             if (this.eventsView.getSelectionModel().getSelectedItem() != null){
 
@@ -225,7 +247,8 @@ public class CalendarView {
             }
         });
 
-        Button completeEventButton = new Button("Complete Event");
+        this.completeEventButton = new Button("Complete Event");
+        this.completeEventButton.setTextFill(colour_font);
         //completeEventButton.setScaleX(1.15);
         //completeEventButton.setScaleY(1.15);
         completeEventButton.setOnAction(e -> {
@@ -234,11 +257,18 @@ public class CalendarView {
                 return;
             }
             //int index = 0;
+            Event completed = null;
             for (Event event: this.events){
                 if (event.getName() == eventName){
-                    event.complete();
-                    //this.events.remove(event);
+                    completed = event;
+                    completed.complete();
+                    break;
                 }
+            }
+            if (!(completed == null)){
+                this.events.remove(completed);
+                this.model.getAllEvents().remove(completed);
+                this.saveModel();
             }
         });
 
@@ -263,6 +293,8 @@ public class CalendarView {
         realLayout.setCenter(calendarLayout);
         realLayout.setBottom(buttons);
         realLayout.setRight(eventDisplay);
+        realLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));
+
 
 //        realLayout.setRight(goalDisplay);
 
