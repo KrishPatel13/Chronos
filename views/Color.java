@@ -15,39 +15,41 @@ import java.util.ResourceBundle;
 
 
 /**
- * Short class description here
+ * Color class for handling color picker to choose background and font color as per user's choice
  *
  */
 public class Color implements Initializable
 {
-    public AnchorPane myPane2; //
-    public Circle circle2; //
-    public Text text1; // //
-    public Text text2; //
-    public AnchorPane myPane; //
+    public AnchorPane myPane2; // color picker for font change pane
+    public Circle circle2; // chosen color reflected shape for font
+    public Text text1; // text in color picker window
+    public Text text2; // text in color picker window
+    public AnchorPane myPane; //  color picker for background change pane
     @FXML
-    private Circle circle; //
+    private Circle circle; // chosen color reflected shape for background
     @FXML
-    private ColorPicker cp; //
+    private ColorPicker cp; // chosen color for background
     @FXML
-    private ColorPicker cp2; //
+    private ColorPicker cp2; // chosen color for font
     @FXML
-    static CalendarView cv; //
+    static CalendarView cv; // calendar view access
 
 
     /**
-     * Write ehre
+     * Choose a background theme for the application as per choice of user.
      *
-     * @param actionEvent write here
+     * @param actionEvent application's response if the user chooses his desired background color.
      */
     public void handleColorPicker(ActionEvent actionEvent)
     {
-        // write hree
+        // Change the fill color for the circle when you pick a new color and get color value from user to change
+        // the background color for calendar's background and border layout.
         circle.setFill(cp.getValue());
         cv.calendarLayout.setBackground(new Background(new BackgroundFill(cp.getValue(),null,null)));
         cv.realLayout.setBackground(new Background(new BackgroundFill(cp.getValue(),null,null)));
 
-        // write here
+        //Change the fill color for the circle when you pick a new color and get color value from the user to
+        // change background color for color picker window.
         CalendarView.colour = cp.getValue();
         myPane.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
         cv.saveModel();
@@ -55,9 +57,9 @@ public class Color implements Initializable
 
 
     /**
-     * write here
+     * Choose a font color for the application as per choice of user.
      *
-     * @param actionEvent write ehre
+     * @param actionEvent application's response if user chooses his desired font color.
      */
     public void handleFontColor(ActionEvent actionEvent) {
         // Colour Picker UI
@@ -75,12 +77,11 @@ public class Color implements Initializable
         cv.saveModel();
     }
 
-
     /**
-     * write here
+     * Change the style of color picker
      *
-     * @param url write here
-     * @param resourceBundle write here
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object,or null if the root object was not localized.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
