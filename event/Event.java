@@ -66,6 +66,7 @@ public class Event implements Serializable
         return observerList;
     }
 
+
     /**
      * Get the Event's name.
      *
@@ -143,6 +144,11 @@ public class Event implements Serializable
     }
 
 
+    /**
+     * Set the Event's associated points to a new pointValue
+     *
+     * @param pointValue the new Event's associated points
+     */
     public void setPointValue(int pointValue)
     {
         this.pointValue = pointValue;
