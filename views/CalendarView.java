@@ -91,6 +91,7 @@ public class CalendarView {
         return instance;
     }
 
+    // private constructor to enforce Singleton
     private CalendarView(CalendarModel model, Stage stage){
         // Get a model
         this.model = model;
@@ -107,6 +108,7 @@ public class CalendarView {
         initUI();
     }
 
+    // load stored info
     public void loadModel() {
         File folder = new File("save/");
         if (!folder.exists()) {
@@ -137,6 +139,7 @@ public class CalendarView {
         }
     }
 
+    // Save our model
     public void saveModel() {
         this.model.colour = colour.toString();
         this.model.colour_font = colour_font.toString();
