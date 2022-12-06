@@ -14,11 +14,19 @@ import observer.Goal;
 
 import static views.CalendarView.colour;
 
+/**
+ * A window that notifies the user when they have completed one of their goals.
+ */
 public class GoalCompleteView {
 
-    private Label completeLabel = new Label("");
-    private Button okButton = new Button("OK");
+    private Label completeLabel = new Label(""); // Message that tells the user which goal has been completed
+    private Button okButton = new Button("OK"); // Button to close this window
 
+    /**
+     * Constructor
+     *
+     * @param o the goal which has been completed
+     */
     public GoalCompleteView(Goal o) {
         final Stage dialog = new Stage();
         VBox dialogVbox = new VBox(20);

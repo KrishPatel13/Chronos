@@ -21,10 +21,13 @@ import java.util.ArrayList;
 
 import static views.CalendarView.colour;
 
+/**
+ * GUI for the user to view their existing Goals. Shows ongoing Goals and completed Goals separately.
+ */
 public class GoalListView {
 
-    CalendarView calendarView;
-    private Paint colour;
+    CalendarView calendarView; // The application's CalendarView
+    private Paint colour; // The background colour
 
     /**
      * Constructor

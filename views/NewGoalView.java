@@ -17,15 +17,19 @@ import observer.Goal;
 
 import static views.CalendarView.colour;
 
+/**
+ * GUI for the user to create new Goals. Allows the user to choose a name and amount of points required to complete the
+ * goal.
+ */
 public class NewGoalView {
 
-    CalendarView calendarView;
-    private Paint colour;
-    private Label createGoalLabel = new Label("Create a new goal! Enter a name and point value.");
-    private TextField goalNameTextField = new TextField("Name");
-    private TextField goalPointsTextField = new TextField("Points");
-    private Label errorLabel = new Label("");
-    private Button saveButton = new Button("Save Goal");
+    CalendarView calendarView; // The application's CalendarView
+    private Paint colour; // The background colour
+    private Label createGoalLabel = new Label("Create a new goal! Enter a name and point value."); // Text label at the top of the window
+    private TextField goalNameTextField = new TextField("Name"); // Text field to enter the new goal's name
+    private TextField goalPointsTextField = new TextField("Points"); // Text field to enter a number of points
+    private Label errorLabel = new Label(""); // Label to display whether the goal was created successfully or not
+    private Button saveButton = new Button("Save Goal"); // Button to create and save the new goal
 
     /**
      * Constructor
