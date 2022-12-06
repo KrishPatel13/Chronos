@@ -1,8 +1,9 @@
 package views;
 
-
 import event.Event;
-
+import timeBehaviour.TimeBehaviour;
+import timeBehaviour.TimePoint;
+import timeBehaviour.TimeRange;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -17,21 +18,13 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import model.CalendarModel;
-import timeBehaviour.TimeBehaviour;
-import timeBehaviour.TimePoint;
-import timeBehaviour.TimeRange;
-
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static views.CalendarView.colour;
 
 
 public class EventCreatorView {

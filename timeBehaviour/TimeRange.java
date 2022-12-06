@@ -2,6 +2,10 @@ package timeBehaviour;
 
 import java.time.LocalDateTime;
 
+
+/**
+ * A TimeRange Class, a concrete class for TimeBehaviour with a range of start time and end time.
+ */
 public class TimeRange implements TimeBehaviour
 {
     private final LocalDateTime startTime; // the start time of the TimeBehaviour object.

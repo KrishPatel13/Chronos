@@ -3,9 +3,11 @@ package timeBehaviour;
 import java.time.LocalDateTime;
 
 
+/**
+ * A TimePoint Class, a concrete class for TimeBehaviour with deadline.
+ */
 public class TimePoint implements TimeBehaviour
 {
-
     private final LocalDateTime deadlineTime; // the deadline of the TimeBehaviour object.
 
 
