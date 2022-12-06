@@ -3,15 +3,26 @@ package timeBehaviour;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public interface TimeBehaviour extends Serializable {
+
+/**
+ * A TimeBehaviour interface.
+ */
+public interface TimeBehaviour extends Serializable
+{
+
     /**
-     * To set the time to a specific time range/point.
+     * To get the time of the TimeBehaviour object.
+     *
+     * @return LocalDateTime time
      */
-    public void setTime(LocalDateTime time);
+    LocalDateTime getTime();
 
-    public void setTime(LocalDateTime time1, LocalDateTime time2);
 
-    public LocalDateTime getTime();
-
-    public boolean inTime(LocalDateTime time);
+    /**
+     * To check if the timebehaviour is still in-time or not.
+     *
+     * @param time the time to check of the timeBehaviour is still in time or not.
+     * @return boolean true if the timebehaviour is still within the deadline, false otherwise.
+     */
+    boolean inTime(LocalDateTime time);
 }

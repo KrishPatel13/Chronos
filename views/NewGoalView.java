@@ -15,6 +15,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import observer.Goal;
 
+import static views.CalendarView.colour;
+
 public class NewGoalView {
 
     CalendarView calendarView;
@@ -43,15 +45,19 @@ public class NewGoalView {
         createGoalLabel.setId("createGoalLabel");
         createGoalLabel.setTextFill(CalendarView.colour_font);
         createGoalLabel.setFont(new Font(16));
+        createGoalLabel.setTextFill(CalendarView.colour_font);
         goalNameTextField.setId("goalNameTextField");
         goalNameTextField.setFont(new Font(16));
         goalPointsTextField.setId("goalPointsTextField");
         goalPointsTextField.setFont(new Font(16));
         errorLabel.setId("errorLabel");
+        errorLabel.setTextFill(CalendarView.colour_font);
         errorLabel.setFont(new Font(16));
         saveButton.setId("saveButton");
         saveButton.setTextFill(CalendarView.colour_font);
         saveButton.setFont(new Font(16));
+        dialogVbox.setBackground(new Background(new BackgroundFill(colour,null,null)));
+
         saveButton.setOnAction(e -> createGoal());
         errorLabel.setTextFill(CalendarView.colour_font);
 
