@@ -1,50 +1,46 @@
 package timeBehaviour;
 
-
 import java.time.LocalDateTime;
 
-public class TimePoint implements TimeBehaviour{
-    private LocalDateTime deadlineTime;
+
+public class TimePoint implements TimeBehaviour
+{
+
+    private final LocalDateTime deadlineTime; // the deadline of the TimeBehaviour object.
 
 
+    /**
+     * Constructor for initializing the TimePoint timebehavior with the given deadline time.
+     *
+     * @param time LocalDateTime
+     */
     public TimePoint(LocalDateTime time)
     {
         this.deadlineTime = time;
     }
 
+
     /**
-     * To set the time to a specific time range/point.
+     * To get the deadline time of an TimeBehaviour object.
      *
-     * @param time the new deadline time to set.
-     */
-    @Override
-    public void setTime(LocalDateTime time) {
-        this.deadlineTime = time;
-    }
-
-    /**
-     * @param time1
-     * @param time2
-     */
-    @Override
-    public void setTime(LocalDateTime time1, LocalDateTime time2) {
-        return;
-    }
-
-    /**
-     * To get the deadline time of an event.
      * @return LocalDateTime deadline of the event.
      */
     @Override
-    public LocalDateTime getTime() {
+    public LocalDateTime getTime()
+    {
         return this.deadlineTime;
     }
 
+
+    /**
+     * To check if the timebehaviour is still in-time or not.
+     *
+     * @param time the time to check of the timeBehaviour is still in time or not.
+     * @return boolean true if the timebehaviour is still within the deadline, false otherwise.
+     */
     @Override
-    public boolean inTime(LocalDateTime time) {
-        if (this.deadlineTime.toLocalDate().equals(time.toLocalDate())){
-            return true;
-        }
-        return false;
+    public boolean inTime(LocalDateTime time)
+    {
+        return this.deadlineTime.toLocalDate().equals(time.toLocalDate());
     }
 }
