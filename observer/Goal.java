@@ -10,7 +10,7 @@ public class Goal implements EventObserver, Serializable {
 
     private String name; // The goal's name
     private int currentPoints; // The amount of points the user has currently earned toward this goal
-    private int pointsToBadge; // The amount of points that are required to complete this goal
+    private final int pointsToBadge; // The amount of points that are required to complete this goal
 
     /**
      * Constructor for the Goal class. Takes a name and a point value.
@@ -34,12 +34,7 @@ public class Goal implements EventObserver, Serializable {
     @Override
     public boolean addPoints(int points) {
         this.currentPoints += points;
-        if (this.currentPoints >= this.pointsToBadge) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return this.currentPoints >= this.pointsToBadge;
     }
 
     /**
@@ -49,12 +44,6 @@ public class Goal implements EventObserver, Serializable {
      */
     public String getName() {return this.name;}
 
-    /**
-     * Change the name of this Goal.
-     *
-     * @param n the Goal's new name.
-     */
-    public void setName(String n) { this.name = n;}
 
     /**
      * Get the string representation of this goal. If the goal is incomplete, its string representation looks like this:
