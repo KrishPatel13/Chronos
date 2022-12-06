@@ -1,7 +1,6 @@
 package views;
 
 import event.Event;
-import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -10,22 +9,17 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.CalendarModel;
 import observer.EventObserver;
-import javafx.scene.layout.*;
-import javafx.stage.StageStyle;
 
 
 import java.io.*;
@@ -71,7 +65,7 @@ public class CalendarView {
     Button completeEventButton;
 
     //Variables for getting the background and text color to change window theme
-    static Paint colour = javafx.scene.paint.Color.valueOf("#FFFFFF") ;;
+    static Paint colour = javafx.scene.paint.Color.valueOf("#FFFFFF");
     static Paint colour_font = javafx.scene.paint.Color.valueOf("#000000") ;
 
     // ListView to display event names for a specific date
@@ -127,11 +121,7 @@ public class CalendarView {
                     CalendarModel.setCompletedGoals((ArrayList<EventObserver>) loadList.get(2));
                     CalendarView.colour = javafx.scene.paint.Color.valueOf(this.model.colour);
                     CalendarView.colour_font = javafx.scene.paint.Color.valueOf(this.model.colour_font);
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
 
@@ -156,8 +146,6 @@ public class CalendarView {
             FileOutputStream fout = new FileOutputStream(fModel);
             ObjectOutputStream oos = new ObjectOutputStream(fout);
             oos.writeObject(saveList);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -236,12 +224,8 @@ public class CalendarView {
             FXMLLoader fxmlLoader = new FXMLLoader(CalendarView.class.getResource("ColorPick.fxml"));
             Scene scene = null;
             try {
-//                scene = new Scene(fxmlLoader.load());
-
-                Parent root1  = (Parent) fxmlLoader.load(); // TODO: Error Source
+                Parent root1  = (Parent) fxmlLoader.load();
                 Stage stage = new Stage();
-//                stage.initModality(Modality.APPLICATION_MODAL);
-//                stage.initStyle(StageStyle.UNDECORATED);
                 stage.setTitle("Chronos");
                 stage.setScene(new Scene(root1));
                 stage.show();
