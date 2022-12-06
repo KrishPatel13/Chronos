@@ -119,8 +119,6 @@ public class EventEditorView
             this.pointTimePicker.setText(tp.getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).substring(11,16));
         }
 
-
-
         //If event has a time range:
         else
         {

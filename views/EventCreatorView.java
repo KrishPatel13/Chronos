@@ -18,7 +18,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,38 +26,35 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+/**
+ * A EventCreatorView class for handling the creation of events.
+ */
 public class EventCreatorView {
-
-    CalendarView calendarView;
-
-//    CalendarModel calendarModel;
-    private Label createEventLabel = new Label("Create a new event!");
-    private TextField nameTextField = new TextField("Name");
-    private TextField pointsTextField = new TextField("Points");
-    private TextField descTextField = new TextField("Description");
-    private Button changeTimeButton = new Button("Choose start/end time");
-    private DatePicker pointDatePicker = new DatePicker(LocalDate.now());
-    private TextField pointTimePicker = new TextField("Time (hh:mm)");
-    private DatePicker startDatePicker = new DatePicker(LocalDate.now());
-    private TextField startTimePicker = new TextField("Start time (hh:mm)");
-    private DatePicker endDatePicker = new DatePicker(LocalDate.now());
-    private TextField endTimePicker = new TextField("End time (hh:mm)");
-    private Button saveButton = new Button("Save Event");
-    private Label errorLabel = new Label("");
-
-    private Paint colour;
+    private final CalendarView calendarView; // the calendar view
+    private final TextField nameTextField = new TextField(""); // the name of the event
+    private final TextField pointsTextField = new TextField(""); // the points associated with the event
+    private final TextField descTextField = new TextField(""); // the description of the event
+    private final Button changeTimeButton = new Button("Choose start/end time"); // Button for changing the type of time of the event
+    private final DatePicker pointDatePicker = new DatePicker(LocalDate.now()); // DatePicker for TimePoint event
+    private final TextField pointTimePicker = new TextField("Time (hh:mm)"); // Deadline time for TimePoint event
+    private final DatePicker startDatePicker = new DatePicker(LocalDate.now()); // Start time DatePicker for TimeRange event
+    private final TextField startTimePicker = new TextField("Start time (hh:mm)"); // Start time for TimeRange event
+    private final DatePicker endDatePicker = new DatePicker(LocalDate.now()); // End time DatePicker for TimeRange event
+    private final TextField endTimePicker = new TextField("End time (hh:mm)"); // End time for TimeRange event
+    private final Button saveButton = new Button("Save Changes"); // Button for Saving the edited event
+    private final Label errorLabel = new Label(""); // the error message to display
 
 
     /**
-     * Constructor
+     * Constructor for the EventCreatorView Class.
      *
      * @param calendarView the application's CalendarView
      */
     public EventCreatorView(CalendarView calendarView) {
         this.calendarView = calendarView;
 
-//        this.calendarModel = this.calendarView.model;
 
+        // Set up the stage
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(calendarView.stage);
@@ -66,7 +62,11 @@ public class EventCreatorView {
         dialogVbox.setBackground(new Background(new BackgroundFill(CalendarView.colour,null,null)));
         dialogVbox.setPadding(new Insets(20, 20, 20, 20));
 
+
+
+        // Font UI
         Font f = new Font(16);
+        Label createEventLabel = new Label("Create a new event!");
         createEventLabel.setFont(f);
         nameTextField.setFont(f);
         pointsTextField.setFont(f);
@@ -81,12 +81,11 @@ public class EventCreatorView {
         saveButton.setFont(f);
 
 
+
+        // Buttons, TextFields, and Labels UI.
         createEventLabel.setTextFill(CalendarView.colour_font);
         changeTimeButton.setTextFill(CalendarView.colour_font);
         saveButton.setTextFill(CalendarView.colour_font);
-
-        saveButton.setOnAction(e -> createEvent());
-
         VBox vbox = new VBox(10, createEventLabel, nameTextField, pointsTextField, descTextField, changeTimeButton, pointDatePicker, pointTimePicker, saveButton, errorLabel);
         dialogVbox.getChildren().add(vbox);
         Scene scene = new Scene(dialogVbox, 400, 500);
@@ -94,6 +93,10 @@ public class EventCreatorView {
         dialog.show();
         dialog.setAlwaysOnTop(true);
 
+
+
+        // On Action Function Calls.
+        saveButton.setOnAction(e -> createEvent());
         changeTimeButton.setOnAction(e -> {
             if (vbox.getChildren().contains(pointDatePicker)) {
                 vbox.getChildren().remove(pointDatePicker);
@@ -132,6 +135,8 @@ public class EventCreatorView {
     /**
      * Create a new Event using the parameters given in the text fields and date pickers.
      * Store this new Event in the CalendarModel's list of Events.
+     *
+     * @throws NumberFormatException for invalid input of integer in points field.
      */
     private void createEvent() throws NumberFormatException {
 
@@ -140,6 +145,7 @@ public class EventCreatorView {
             this.errorLabel.setText("Please enter the Event Name. It can NOT be Blank!");
             return;
         }
+        // Check if the event name is already in the events list.
         else
         {
             String temp = this.nameTextField.getText().trim();
@@ -152,13 +158,16 @@ public class EventCreatorView {
                 }
             }
         }
+        // store the valid name
         String event_name = this.nameTextField.getText().trim();
+
 
         // Check if the Event's Description is not empty.
         if (this.descTextField.getText().trim().isEmpty() || this.descTextField.getText().trim().isBlank()) {
             this.errorLabel.setText("Please enter the Event's Description. It can NOT be Blank!");
             return;
         }
+        //Store the valid description
         String event_description = this.descTextField.getText().trim();
 
 
@@ -166,8 +175,10 @@ public class EventCreatorView {
         int event_points = 0;
         // Check if the Event's associated Points are of integer type.
         try {
-            event_points += Integer.parseInt(points);
-        } catch (NumberFormatException e) {
+            event_points += Integer.parseInt(points); // store the valid points associated with the event.
+        }
+        catch (NumberFormatException e)
+        {
             this.errorLabel.setText("Please enter a Integer value for the points associated with the event.");
             return;
         }
@@ -184,9 +195,6 @@ public class EventCreatorView {
             if (matcher.find()) {
                 // match found, valid deadline HH:mm.
                 String yyyy_mm_dd = this.pointDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-                // TODO: Consider the case of  the where the deadline is a past date.
-
                 String yyyy_mm_dd_HH_mm = yyyy_mm_dd + " " + deadline_hours;
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 LocalDateTime pointTime = LocalDateTime.parse(yyyy_mm_dd_HH_mm, formatter);
@@ -202,37 +210,33 @@ public class EventCreatorView {
                 // Add the event to the events list of CalendarView.model.events
                 this.calendarView.model.addEvent(e);
 
+                // Save the event
                 this.calendarView.saveModel();
+
+
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
-
             }
-            else
-            {
-                // Invalid Format of HH:mm
+            else // Invalid Format of HH:mm
                 this.errorLabel.setText("Please Re-enter the time of the event. Enter in HH:mm format.");
-                return;
-            }
-        } else {
+        }
+        else
+        {
             // Create a new Time Range object based on the start-time and end-time of the user.
-
 
             String start_time = this.startTimePicker.getText().trim();
             String end_time = this.endTimePicker.getText().trim();
 
 
             Pattern pattern = Pattern.compile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
-
             Matcher matcher = pattern.matcher(start_time);
             Matcher matcher1 = pattern.matcher(end_time);
 
-            if (matcher1.find() && matcher.find()) {
+            if (matcher1.find() && matcher.find())
+            {
                 // match found, valid deadline HH:mm.
                 String yyyy_mm_dd = this.startDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 String yyyy_mm_dd2 = this.endDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-                // TODO: Consider the case of  the where the deadline is a past date.
-
                 String yyyy_mm_dd_HH_mm = yyyy_mm_dd + " " + start_time;
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 LocalDateTime start_time_block = LocalDateTime.parse(yyyy_mm_dd_HH_mm, formatter);
@@ -254,16 +258,14 @@ public class EventCreatorView {
                 // Add the event to the events list of CalendarView.model.events
                 this.calendarView.model.addEvent(e);
 
+                // Save the event
                 this.calendarView.saveModel();
 
                 //Success Message!
                 this.errorLabel.setText("Event Added to the Calendar!");
-            } else {
-                // Invalid Format of HH:mm
-                this.errorLabel.setText("Invalid Start/End time of the event. Enter in HH:mm format.");
-                return;
             }
-
+            else // Invalid Format of HH:mm
+                this.errorLabel.setText("Invalid Start/End time of the event. Enter in HH:mm format.");
         }
     }
 }
