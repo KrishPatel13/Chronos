@@ -19,8 +19,6 @@ import observer.EventObserver;
 
 import java.util.ArrayList;
 
-import static views.CalendarView.colour;
-
 public class GoalListView {
 
     CalendarView calendarView;
@@ -78,5 +76,5 @@ public class GoalListView {
         dialog.setScene(scene);
         dialog.show();
         dialog.setAlwaysOnTop(true);
-        }
+    }
 }
