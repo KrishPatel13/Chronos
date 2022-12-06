@@ -1,5 +1,6 @@
 package observer;
 
+
 public interface EventObserver {
 
     /**
@@ -7,5 +8,5 @@ public interface EventObserver {
      *
      * @param points the amount of points to be added
      */
-    public boolean addPoints(int points);
+    boolean addPoints(int points);
 }
