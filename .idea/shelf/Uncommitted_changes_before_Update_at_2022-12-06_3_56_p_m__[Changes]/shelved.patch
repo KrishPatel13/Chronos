@@ -1,0 +1,107 @@
+Index: model/CalendarModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport event.Event;\r\nimport observer.EventObserver;\r\n\r\nimport java.time.LocalDateTime;\r\nimport java.io.Serializable;\r\nimport java.util.ArrayList;\r\n\r\n// Class to store app information behind the scene\r\npublic class CalendarModel implements Serializable {\r\n\r\n    // list of events\r\n    ArrayList<Event> events;\r\n\r\n    // color settings\r\n    public String colour;\r\n    public String colour_font;\r\n\r\n    // list of goals that remain the same\r\n    private static ArrayList<EventObserver> completedGoals = new ArrayList<>();\r\n\r\n\r\n    // Constructor for no events\r\n    public CalendarModel()\r\n    {\r\n        this.events = new ArrayList<Event>();\r\n    }\r\n\r\n    // Constructor if some events are there\r\n    public CalendarModel(ArrayList<Event> events){\r\n        this.events = events;\r\n    }\r\n\r\n    // get list of completed goals\r\n    public static ArrayList<EventObserver> getCompletedGoals() {\r\n        return completedGoals;\r\n    }\r\n\r\n    // set completed goals\r\n    public static void setCompletedGoals(ArrayList<EventObserver> oList) {completedGoals = oList;}\r\n\r\n    // add an event to the calendar\r\n    public void addEvent(Event e)\r\n    {\r\n        this.events.add(e);\r\n    }\r\n\r\n    // get the list of all events\r\n    public ArrayList<Event> getAllEvents(){\r\n        return this.events;\r\n    }\r\n\r\n    // get events filtered by a date\r\n    public ArrayList<Event> getEventsInTime(LocalDateTime time)\r\n    {\r\n        ArrayList<Event> filteredEvents = new ArrayList<>();\r\n        for (Event e: this.events)\r\n            if (e.getTimeBehaviour().inTime(time))\r\n            {\r\n                System.out.println(e.getName());\r\n                filteredEvents.add(e);\r\n            }\r\n        return filteredEvents;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/model/CalendarModel.java b/model/CalendarModel.java
+--- a/model/CalendarModel.java	(revision f2cf53451c55d8db395986bc1d2605377a89ff82)
++++ b/model/CalendarModel.java	(date 1670360126300)
+@@ -51,7 +51,9 @@
+         return this.events;
+     }
+ 
+-    // get events filtered by a date
++    /**
++     * get events filtered by a date
++     */
+     public ArrayList<Event> getEventsInTime(LocalDateTime time)
+     {
+         ArrayList<Event> filteredEvents = new ArrayList<>();
+Index: views/CalendarView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package views;\r\n\r\nimport event.Event;\r\nimport javafx.fxml.FXML;\r\nimport javafx.collections.FXCollections;\r\nimport javafx.collections.ObservableList;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.geometry.Insets;\r\nimport javafx.geometry.Pos;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.*;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.DatePicker;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.control.ListView;\r\nimport javafx.scene.control.skin.DatePickerSkin;\r\nimport javafx.scene.paint.Paint;\r\nimport javafx.scene.shape.Circle;\r\nimport javafx.scene.text.Font;\r\nimport javafx.stage.Modality;\r\nimport javafx.scene.layout.*;\r\nimport javafx.stage.Stage;\r\nimport model.CalendarModel;\r\nimport observer.EventObserver;\r\nimport javafx.scene.layout.*;\r\nimport javafx.stage.StageStyle;\r\n\r\n\r\nimport java.io.*;\r\nimport java.time.LocalDate;\r\nimport java.time.LocalDateTime;\r\nimport java.util.ArrayList;\r\n\r\n\r\npublic class CalendarView {\r\n\r\n    //Below defines all the components we'll need\r\n\r\n    //The main root\r\n    Stage stage;\r\n\r\n    //The model that stores event information\r\n    CalendarModel model;\r\n\r\n    //The sublayout that contains our calendar\r\n    AnchorPane calendarLayout;\r\n\r\n    //The overall layout that contains everything\r\n    BorderPane realLayout;\r\n\r\n    //Buttons used for functionality\r\n    Button makeEventButton;\r\n    Button makeGoalButton;\r\n    Button changeThemeButton;\r\n    Button viewGoalButton;\r\n\r\n    //The calendar used to access events\r\n    DatePicker calendar;\r\n\r\n    //A wrapper class used to help display the calendar in a better way\r\n    DatePickerSkin calendarSkin;\r\n\r\n    // A node that takes the calendar and makes it always visible\r\n    Node calendarDisplay;\r\n    Button editButton;\r\n\r\n    //Label showing the selected date\r\n    Label dateDisplay;\r\n    Button completeEventButton;\r\n\r\n    //Variables for getting the background and text color to change window theme\r\n    static Paint colour = javafx.scene.paint.Color.valueOf(\"#FFFFFF\") ;;\r\n    static Paint colour_font = javafx.scene.paint.Color.valueOf(\"#000000\") ;\r\n\r\n    // ListView to display event names for a specific date\r\n    ListView<String> eventsView = new ListView<>();\r\n\r\n    // List to store events for a given date\r\n    ArrayList<Event> events = new ArrayList<>();\r\n\r\n    // static instance\r\n    static CalendarView instance;\r\n\r\n    //Method to implement singleton design pattern\r\n    public static CalendarView getView(CalendarModel model, Stage stage){\r\n        if (instance == null){\r\n            instance = new CalendarView(model, stage);\r\n        }\r\n        return instance;\r\n    }\r\n\r\n    private CalendarView(CalendarModel model, Stage stage){\r\n        // Get a model\r\n        this.model = model;\r\n\r\n        // load stored model info\r\n        loadModel();\r\n        this.stage = stage;\r\n\r\n        // Set up the layouts\r\n        this.calendarLayout = new AnchorPane();\r\n        this.realLayout = new BorderPane();\r\n\r\n        // Create the UI\r\n        initUI();\r\n    }\r\n\r\n    public void loadModel() {\r\n        File folder = new File(\"save/\");\r\n        if (!folder.exists()) {\r\n            return;\r\n        }\r\n        File[] fileList = folder.listFiles();\r\n        assert fileList != null;\r\n        for (File f : fileList) {\r\n            if (f.isFile() && f.getName().equals(\"model.ser\")) {\r\n                try {\r\n                    FileInputStream file = new FileInputStream(\"save/model.ser\");\r\n                    ObjectInputStream in = new ObjectInputStream(file);\r\n                    ArrayList<Object> loadList = (ArrayList<Object>) in.readObject();\r\n                    this.model = (CalendarModel) loadList.get(0);\r\n                    Event.setObserverList((ArrayList<EventObserver>) loadList.get(1));\r\n                    CalendarModel.setCompletedGoals((ArrayList<EventObserver>) loadList.get(2));\r\n                    CalendarView.colour = javafx.scene.paint.Color.valueOf(this.model.colour);\r\n                    CalendarView.colour_font = javafx.scene.paint.Color.valueOf(this.model.colour_font);\r\n                } catch (FileNotFoundException e) {\r\n                    throw new RuntimeException(e);\r\n                } catch (IOException e) {\r\n                    throw new RuntimeException(e);\r\n                } catch (ClassNotFoundException e) {\r\n                    throw new RuntimeException(e);\r\n                }\r\n\r\n            }\r\n        }\r\n    }\r\n\r\n    public void saveModel() {\r\n        this.model.colour = colour.toString();\r\n        this.model.colour_font = colour_font.toString();\r\n        File folder = new File(\"save/\");\r\n        if (!folder.exists()) {\r\n            folder.mkdir();\r\n        }\r\n        File fModel = new File(\"save/model.ser\");\r\n        ArrayList<Object> saveList = new ArrayList<>();\r\n        try {\r\n            saveList.add(this.model);\r\n            saveList.add(Event.getObserverList());\r\n            saveList.add(CalendarModel.getCompletedGoals());\r\n            FileOutputStream fout = new FileOutputStream(fModel);\r\n            ObjectOutputStream oos = new ObjectOutputStream(fout);\r\n            oos.writeObject(saveList);\r\n        } catch (FileNotFoundException e) {\r\n            throw new RuntimeException(e);\r\n        } catch (IOException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n\r\n    }\r\n\r\n    private void initUI(){\r\n\r\n        // set the title of the screen\r\n        this.stage.setTitle(\"Chronos\");\r\n\r\n\r\n        //Make core screen\r\n        this.calendarLayout = new AnchorPane();\r\n        this.realLayout = new BorderPane();\r\n\r\n        //make a DatePicker for our calendar, and then set up a display that keeps\r\n        // the calendar always active\r\n        calendar = new DatePicker(LocalDate.now());\r\n        calendarSkin = new DatePickerSkin(calendar);\r\n        calendarDisplay = calendarSkin.getPopupContent();\r\n        calendarDisplay.setScaleX(1.5);\r\n        calendarDisplay.setScaleY(1.5);\r\n        calendarDisplay.setLayoutX(100);\r\n        calendarDisplay.setLayoutY(100);\r\n        calendarLayout.getChildren().add(calendarDisplay);\r\n        calendarLayout.setPrefSize(400, 400);\r\n        calendarLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));\r\n\r\n        //Create the label to display the date\r\n        this.dateDisplay = new Label(calendar.getValue().toString());\r\n        dateDisplay.setTextFill(colour_font);\r\n        dateDisplay.setFont(new Font(20));\r\n        dateDisplay.setAlignment(Pos.TOP_CENTER);\r\n        //When a date is selected, update our list of events in the below\r\n        calendar.setOnAction(e ->{\r\n            dateDisplay.setText(calendar.getValue().toString());\r\n            this.displayEvents(calendar.getValue().atStartOfDay());\r\n        });\r\n\r\n        //Create the button to make events\r\n        this.makeEventButton = new Button(\"Make Event\");\r\n        makeEventButton.setScaleX(1.15);\r\n        makeEventButton.setScaleY(1.15);\r\n        makeEventButton.setTextFill(colour_font);\r\n        makeEventButton.setOnAction(e -> {\r\n            EventCreatorView ecv = new EventCreatorView(this);\r\n            this.displayEvents(calendar.getValue().atStartOfDay());\r\n        });\r\n\r\n        //Create the button to make goals\r\n        this.makeGoalButton = new Button(\"Make Goal\");\r\n        makeGoalButton.setScaleX(1.15);\r\n        makeGoalButton.setScaleY(1.15);\r\n        makeGoalButton.setTextFill(colour_font);\r\n        makeGoalButton.setOnAction(e -> {\r\n            NewGoalView ngv = new NewGoalView(this);\r\n        });\r\n\r\n        //Create the button to view\r\n        this.viewGoalButton = new Button(\"View Goal\");\r\n        viewGoalButton.setScaleX(1.15);\r\n        viewGoalButton.setScaleY(1.15);\r\n        viewGoalButton.setTextFill(colour_font);\r\n        viewGoalButton.setOnAction(e -> {\r\n            GoalListView glv = new GoalListView(this);\r\n        });\r\n\r\n        //Create Button for changing the theme\r\n        this.changeThemeButton = new Button(\"Change Theme\");\r\n        changeThemeButton.setTextFill(colour_font);\r\n        changeThemeButton.setScaleX(1.15);\r\n        changeThemeButton.setScaleY(1.15);\r\n        changeThemeButton.setOnAction(e -> {\r\n            // Configure the Color\r\n            FXMLLoader fxmlLoader = new FXMLLoader(CalendarView.class.getResource(\"ColorPick.fxml\"));\r\n            Scene scene = null;\r\n            try {\r\n//                scene = new Scene(fxmlLoader.load());\r\n\r\n                Parent root1  = (Parent) fxmlLoader.load(); // TODO: Error Source\r\n                Stage stage = new Stage();\r\n//                stage.initModality(Modality.APPLICATION_MODAL);\r\n//                stage.initStyle(StageStyle.UNDECORATED);\r\n                stage.setTitle(\"Chronos\");\r\n                stage.setScene(new Scene(root1));\r\n                stage.show();\r\n            } catch (IOException ex) {\r\n                throw new RuntimeException(ex);\r\n            }\r\n            Color.cv = this;\r\n        });\r\n\r\n        //Create button bar\r\n        HBox buttons = new HBox(10);\r\n        buttons.setPadding(new Insets(30));\r\n        buttons.getChildren().addAll(makeEventButton, makeGoalButton, viewGoalButton, changeThemeButton);\r\n        buttons.setPadding(new Insets(20));\r\n\r\n        //Create buttons for editing and completing events\r\n        this.editButton = new Button(\"Edit Event\");\r\n        this.editButton.setTextFill(colour_font);\r\n        editButton.setOnAction(e -> {\r\n            if (this.eventsView.getSelectionModel().getSelectedItem() != null){\r\n\r\n                for(Event i: this.events)\r\n                {\r\n                    if(i.getName().equals(this.eventsView.getSelectionModel().getSelectedItem()))\r\n                    {\r\n                        EventEditorView editorView = new EventEditorView(this, i);\r\n                        break;\r\n                    }\r\n                }\r\n            }\r\n            else{\r\n                System.out.println(\"Need to select an item\");\r\n            }\r\n        });\r\n\r\n        this.completeEventButton = new Button(\"Complete Event\");\r\n        this.completeEventButton.setTextFill(colour_font);\r\n        completeEventButton.setOnAction(e -> {\r\n            String eventName = this.eventsView.getSelectionModel().getSelectedItem();\r\n            if (eventName == null){\r\n                return;\r\n            }\r\n            //int index = 0;\r\n            Event completed = null;\r\n            for (Event event: this.events){\r\n                if (event.getName() == eventName){\r\n                    completed = event;\r\n                    completed.complete();\r\n                    break;\r\n                }\r\n            }\r\n            if (!(completed == null)){\r\n                this.events.remove(completed);\r\n                this.model.getAllEvents().remove(completed);\r\n                this.saveModel();\r\n            }\r\n        });\r\n\r\n        //Create bar for editing and completing events\r\n        HBox eventsManaging = new HBox();\r\n        eventsManaging.getChildren().addAll(editButton, completeEventButton);\r\n        eventsManaging.setPadding(new Insets(20));\r\n\r\n        //Create view for events\r\n        VBox eventDisplay = new VBox();\r\n        eventDisplay.setPadding(new Insets(20));\r\n        this.displayEvents(LocalDateTime.now());\r\n        eventDisplay.getChildren().addAll(dateDisplay, eventsView, eventsManaging);\r\n\r\n\r\n        //put everything together\r\n        realLayout.setCenter(calendarLayout);\r\n        realLayout.setBottom(buttons);\r\n        realLayout.setRight(eventDisplay);\r\n        realLayout.setBackground(new Background(new BackgroundFill(colour,null,null)));\r\n\r\n\r\n\r\n        //Finally, display everything\r\n        Scene scene = new Scene(realLayout);\r\n        this.stage.setScene(scene);\r\n        this.stage.show();\r\n\r\n    }\r\n\r\n    //Method to display events in the event list\r\n    private void displayEvents(LocalDateTime time)\r\n    {\r\n        //Get events that match the date\r\n        this.events = this.model.getEventsInTime(time);\r\n\r\n        //Get their names\r\n        ArrayList<String> eventNames = new ArrayList<>();\r\n        for (Event e: this.events){\r\n            eventNames.add(e.getName());\r\n        }\r\n\r\n        //Set the ListView to contain those names\r\n        ObservableList<String> namesToDisplay = FXCollections.observableArrayList(eventNames);\r\n        this.eventsView.setItems(namesToDisplay);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/views/CalendarView.java b/views/CalendarView.java
+--- a/views/CalendarView.java	(revision f2cf53451c55d8db395986bc1d2605377a89ff82)
++++ b/views/CalendarView.java	(date 1670360126311)
+@@ -1,7 +1,6 @@
+ package views;
+ 
+ import event.Event;
+-import javafx.fxml.FXML;
+ import javafx.collections.FXCollections;
+ import javafx.collections.ObservableList;
+ import javafx.fxml.FXMLLoader;
+@@ -10,22 +9,17 @@
+ import javafx.scene.Node;
+ import javafx.scene.Parent;
+ import javafx.scene.Scene;
+-import javafx.scene.control.*;
+ import javafx.scene.control.Button;
+ import javafx.scene.control.DatePicker;
+ import javafx.scene.control.Label;
+ import javafx.scene.control.ListView;
+ import javafx.scene.control.skin.DatePickerSkin;
+ import javafx.scene.paint.Paint;
+-import javafx.scene.shape.Circle;
+ import javafx.scene.text.Font;
+-import javafx.stage.Modality;
+ import javafx.scene.layout.*;
+ import javafx.stage.Stage;
+ import model.CalendarModel;
+ import observer.EventObserver;
+-import javafx.scene.layout.*;
+-import javafx.stage.StageStyle;
+ 
+ 
+ import java.io.*;
+@@ -71,7 +65,7 @@
+     Button completeEventButton;
+ 
+     //Variables for getting the background and text color to change window theme
+-    static Paint colour = javafx.scene.paint.Color.valueOf("#FFFFFF") ;;
++    static Paint colour = javafx.scene.paint.Color.valueOf("#FFFFFF");
+     static Paint colour_font = javafx.scene.paint.Color.valueOf("#000000") ;
+ 
+     // ListView to display event names for a specific date
+@@ -125,11 +119,7 @@
+                     CalendarModel.setCompletedGoals((ArrayList<EventObserver>) loadList.get(2));
+                     CalendarView.colour = javafx.scene.paint.Color.valueOf(this.model.colour);
+                     CalendarView.colour_font = javafx.scene.paint.Color.valueOf(this.model.colour_font);
+-                } catch (FileNotFoundException e) {
+-                    throw new RuntimeException(e);
+-                } catch (IOException e) {
+-                    throw new RuntimeException(e);
+-                } catch (ClassNotFoundException e) {
++                } catch (IOException | ClassNotFoundException e) {
+                     throw new RuntimeException(e);
+                 }
+ 
+@@ -153,8 +143,6 @@
+             FileOutputStream fout = new FileOutputStream(fModel);
+             ObjectOutputStream oos = new ObjectOutputStream(fout);
+             oos.writeObject(saveList);
+-        } catch (FileNotFoundException e) {
+-            throw new RuntimeException(e);
+         } catch (IOException e) {
+             throw new RuntimeException(e);
+         }
+@@ -233,12 +221,8 @@
+             FXMLLoader fxmlLoader = new FXMLLoader(CalendarView.class.getResource("ColorPick.fxml"));
+             Scene scene = null;
+             try {
+-//                scene = new Scene(fxmlLoader.load());
+-
+-                Parent root1  = (Parent) fxmlLoader.load(); // TODO: Error Source
++                Parent root1  = (Parent) fxmlLoader.load();
+                 Stage stage = new Stage();
+-//                stage.initModality(Modality.APPLICATION_MODAL);
+-//                stage.initStyle(StageStyle.UNDECORATED);
+                 stage.setTitle("Chronos");
+                 stage.setScene(new Scene(root1));
+                 stage.show();

@@ -1,0 +1,3 @@
+diff --git a/ColorPick.fxml b/views/ColorPick.fxml
+rename from ColorPick.fxml
+rename to views/ColorPick.fxml
