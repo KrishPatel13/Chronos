@@ -7,18 +7,17 @@ import views.CalendarView;
 /**
  * Main Class for the Application.
  */
-public class Main extends Application
-{
+public class Main extends Application {
     CalendarView view; // the calendar view to render for the application.
 
     /**
      * The Main function of the class.
-     *
+     * <p>
      * The launcher for JavaFx application.
+     *
      * @param args arguments
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         launch(args);
     }
 
@@ -30,8 +29,7 @@ public class Main extends Application
      * @throws Exception any exception that is to be thrown
      */
     @Override
-    public void start(Stage primaryStage) throws Exception 
-    {
-        this.view = CalendarView.getView(new CalendarModel(),primaryStage);
+    public void start(Stage primaryStage) throws Exception {
+        this.view = CalendarView.getView(new CalendarModel(), primaryStage);
     }
 }
