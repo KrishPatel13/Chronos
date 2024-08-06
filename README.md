@@ -1,4 +1,4 @@
-# Chronos - Timetable Builder
+# Chronos - Time Management System
 ![Chronos Logo](https://github.com/KrishPatel13/Chronos/blob/main/Chronos%20Logo.png)
 
 Chronos is a flexible time management tool designed to help students strike and maintain a healthy work-life balance while remaining adaptable to changing situations. By blending life-gamification and motivational aspects with schedule-making functionality, Chronos provides a unique approach to managing time effectively and achieving goals.
