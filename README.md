@@ -89,11 +89,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Acknowledgments
 
-Special thanks to our professor and TA Jovana for their continuous support and guidance throughout the project.
-
-## Contact
-
-For any questions or feedback, please reach out via the GitHub repository's issues section.
+Special thanks to our professor @Sonya Allin and TAs for their continuous support and guidance throughout the project.
 
 ---
 
