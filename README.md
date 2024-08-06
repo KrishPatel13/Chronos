@@ -1,3 +1,8 @@
+
+
+
+![Chronos Logo](https://github.com/KrishPatel13/Chronos/blob/main/Chronos%20Logo.png)
+
 "Chronos" was developed with the intention of creating a flexible time manage-
 ment tool that encourages goal accomplishment and enables for simple adjustment.
 Chronos is designed for students who need assistance in striking and maintaining a
